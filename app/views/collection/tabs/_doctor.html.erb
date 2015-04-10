@@ -1,0 +1,12 @@
+<div class="row" id="doctor_page">
+	<div class="col-md-4">
+		<div class="row">		
+			<%= m.simple_fields_for :doctor do |p| %>
+				<%= p.input :avatar, as: :file %>
+				<%= p.input :name, input_html: { "ng-model" => "name"} %>	
+				<%= p.input :bio, input_html: { "ng-model" => "bio"} %>		
+			<% end %>
+		</div>	
+	</div><!--  col-md-4 -->
+		<%= render partial: "themes/standard" %>
+</div>  <!-- row -->

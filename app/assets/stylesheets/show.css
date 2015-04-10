@@ -1,0 +1,20 @@
+body{
+}
+
+.temp{
+	border-color: red;
+	border-style: solid; 
+}
+
+#doctor_page{
+	padding-top: 50px;
+}
+
+.doctor_forms{
+	margin-bottom: 8px;
+}
+
+.preview-standard{
+	background-image: url('/assets/background.jpg');
+	height: 400px;
+}
