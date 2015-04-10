@@ -29,7 +29,8 @@ gem 'devise'
 
 gem 'simple_form'
 
-gem 'paperclip'
+gem 'carrierwave'
+gem "mini_magick"
 
 gem 'sidekiq'
 gem 'sinatra', require: false

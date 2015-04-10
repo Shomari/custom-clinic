@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20150410010822) do
 
   create_table "videos", force: :cascade do |t|
     t.string   "name",            limit: 255
+    t.string   "movie",           limit: 255
     t.integer  "recordable_id",   limit: 4
     t.string   "recordable_type", limit: 255
     t.datetime "created_at",                  null: false

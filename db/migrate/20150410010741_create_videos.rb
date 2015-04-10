@@ -2,6 +2,7 @@ class CreateVideos < ActiveRecord::Migration
   def change
     create_table :videos do |t|
     	t.string :name
+    	t.string :movie
     	t.references :recordable, polymorphic: true, index: true
 
       t.timestamps null: false
