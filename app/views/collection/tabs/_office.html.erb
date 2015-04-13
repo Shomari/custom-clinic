@@ -1,0 +1,17 @@
+<div class="row" id="office_page">
+	<div class="col-md-4">
+		<div class="row">
+		<%= m.simple_fields_for :office do |p| %>
+			<%= p.input :monday, input_html: { "ng-model" => "monday"} %>
+			<%= p.input :tuesday, input_html: { "ng-model" => "tuesday"} %>
+			<%= p.input :wednesday, input_html: { "ng-model" => "wednesday"} %>
+			<%= p.input :thrusday, input_html: { "ng-model" => "thrusday"} %>
+			<%= p.input :friday, input_html: { "ng-model" => "friday"} %>
+			<%= p.input :saturday, input_html: { "ng-model" => "saturday"} %>
+			<%= p.input :sunday, input_html: { "ng-model" => "sunday"} %>
+		<% end %>
+		</div>
+	</div>
+		<%= render partial: "themes/standard/office_preview.html.erb" %>
+	
+</div>

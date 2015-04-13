@@ -20,8 +20,12 @@ ActiveRecord::Schema.define(version: 20150410010822) do
   end
 
   create_table "doctors", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",       limit: 255
+    t.string   "speciality", limit: 255
+    t.string   "bio",        limit: 255
+    t.string   "image",      limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "offices", force: :cascade do |t|

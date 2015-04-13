@@ -1,9 +1,9 @@
 <div class="container" ng-app="clinic">
 	<div class="row">
-		<ul class="nav nav-tabs col-md-4">
+		<ul class="nav nav-tabs col-md-6">
 			<li class="active"><a data-toggle="tab" href="#doctor">Doctor's Info</a></li>
 			<li><a data-toggle="tab" href="#office">Office Info</a></li>
-			<li><a data-toggle="tab" href="#patient">Patient Reminders</a></li>
+			<li><a data-toggle="tab" href="#reminders">Patient Reminders</a></li>
 		</ul>
 	</div> <!-- row -->
 
@@ -15,12 +15,15 @@
 	<div class="tab-content">
 
 		<div class="tab-pane active" id="doctor">
-		<%= simple_form_for @collection, url: collection_index_path do |m| %>
+		<%= simple_form_for @collection, html: {multipart: true}, url: collection_index_path do |m| %>
 		
-			<%= render partial: "collection/tabs/doctor", locals: { :m => m} %>
+			<%= render partial: "collection/tabs/doctor", locals: { :m => m } %>
 		</div>
 		<div class="tab-pane" id="office">
-				<p>IT"s Alive!!!</p>
+			<%= render partial: "collection/tabs/office", locals: { :m => m } %>
+		</div>
+		<div class="tab-pane" id="reminders">
+			<%= render partial: "collection/tabs/reminders", locals: { :m => m } %>
 		</div>
 			<%= m.submit :submit %>
 			<% end %>
