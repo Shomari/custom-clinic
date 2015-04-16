@@ -6,6 +6,7 @@ class CreateDoctors < ActiveRecord::Migration
     	t.string :bio
     	t.string :image
 
+    	t.belongs_to :collection
       t.timestamps null: false
     end
   end

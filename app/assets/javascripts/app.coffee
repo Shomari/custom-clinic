@@ -1,2 +1,2 @@
-clinic = angular.module('clinic',[
-])
+clinic = angular.module('clinic',[]);
+

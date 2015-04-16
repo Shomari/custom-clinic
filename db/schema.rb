@@ -15,28 +15,39 @@ ActiveRecord::Schema.define(version: 20150410010822) do
 
   create_table "collections", force: :cascade do |t|
     t.string   "name",       limit: 255
+    t.integer  "user_id",    limit: 4
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
 
   create_table "doctors", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "speciality", limit: 255
-    t.string   "bio",        limit: 255
-    t.string   "image",      limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "name",          limit: 255
+    t.string   "speciality",    limit: 255
+    t.string   "bio",           limit: 255
+    t.string   "image",         limit: 255
+    t.integer  "collection_id", limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "offices", force: :cascade do |t|
     t.string   "name",          limit: 255
+    t.string   "monday",        limit: 255
+    t.string   "tuesday",       limit: 255
+    t.string   "wednesday",     limit: 255
+    t.string   "thrusday",      limit: 255
+    t.string   "friday",        limit: 255
+    t.string   "saturday",      limit: 255
+    t.string   "sunday",        limit: 255
     t.integer  "collection_id", limit: 4
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
   end
 
   create_table "reminders", force: :cascade do |t|
-    t.string   "info",          limit: 255
+    t.integer  "position",      limit: 4
+    t.string   "heading",       limit: 255
+    t.string   "message",       limit: 255
     t.integer  "collection_id", limit: 4
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false

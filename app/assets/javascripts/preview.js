@@ -5,6 +5,7 @@ function previewFile() {
 
   reader.onloadend = function () {
     $('img').toggle();
+    console.log()
     preview.src = reader.result;
   }
 

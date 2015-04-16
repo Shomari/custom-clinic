@@ -4,7 +4,11 @@
 				<h1>{{name}}</h1>
 				<h3>{{speciality}}</h3>
 				<p>{{bio}}</p>
-				<img src="" height="200" alt="Image preview...">
+				<% if doctor != nil %>
+					<%= image_tag doctor.image_url %>
+				<% else %>
+					<img style="display:none;" src="" height="200" alt="Image preview...">
+				<% end %>
 
 		</div>
 	</div> <!-- row -->

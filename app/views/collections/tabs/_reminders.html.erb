@@ -1,0 +1,22 @@
+<% i = 1 %>
+<div class="row">
+	<ul class="nav nav-tabs">
+		<li class="active"><a data-toggle="tab" href="#0">1</a></li>
+		<% 9.times do %>
+			<li><a data-toggle="tab" href="#<%= i %>"><%= i + 1 %></a></li>
+			<% i += 1 %>
+		<% end %>
+	</ul>
+</div>
+
+<div class="tab-content">	
+<%= m.simple_fields_for :reminders, @reminders do |p| %>
+
+			<div class="tab-pane first" id="<%= p.index %>">
+					<%= p.input :heading, input_html: {"ng-init" => "heading='#{p.object.heading}'" } %>
+					<%= p.input :message %>
+			</div>
+
+
+			<% end %>
+</div>
