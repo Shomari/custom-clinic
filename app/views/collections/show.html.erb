@@ -6,16 +6,9 @@
 			<li><a data-toggle="tab" href="#reminders" id="reminder-tab">Patient Reminders</a></li>
 		</ul>
 	</div> <!-- row -->
-
-	<div class="row">
-		<div class="col-md-4 temp">Template 1</div>
-		<div class="col-md-4 temp">Template 2</div>
-		<div class="col-md-4 temp">Template 3</div>
-	</div> <!-- row -->
 	<div class="tab-content">
-
 		<div class="tab-pane active" id="doctor">
-		<%= simple_form_for @collection, html: {multipart: true} do |m| %>
+		<%= simple_form_for @collection, html: {multipart: true, id: "form"} do |m| %>
 		
 			<%= render partial: "collections/tabs/doctor", locals: { :m => m } %>
 		</div>
@@ -25,7 +18,7 @@
 		<div class="tab-pane" id="reminders">
 			<%= render partial: "collections/tabs/reminders", locals: { :m => m } %>
 		</div>
-			<%= m.submit :submit %>
+			<%= m.button :submit, :id => "submit" %>
 			<% end %>
 
 	</div> <!-- tab content -->

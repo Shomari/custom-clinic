@@ -1,9 +1,16 @@
 body{
 }
 
-/*img{
-	display: none;
-}*/
+img{
+	width: 275px;
+	height: 350px;
+	margin-top: 120px;
+
+}
+
+.form-group{
+	margin-right: 20px;
+}
 
 .temp{
 	border-color: red;
@@ -18,7 +25,29 @@ body{
 	margin-bottom: 8px;
 }
 
+#doctor-box{
+	margin-top: 120px;
+}
+
+.doctor-text{
+	color: white;
+	font-family: "Helvetica";
+	
+}
+
+#doctor-name{
+	font-weight: bold;
+	font-size: 40px;
+	color: #D9B2FB;
+}
+
+#doctor-bio{
+	
+}
+
+
 .preview-standard{
-	background-image: url('/assets/background.jpg');
-	height: 400px;
+	background-image: url('/assets/CMH_template001.jpg');
+	width: 875px;
+	height: 550px;
 }

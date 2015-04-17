@@ -1,11 +1,12 @@
 <div class="row" id="doctor_page">
-	<div class="col-md-4">
+	<div class="col-md-3">
 		<div class="row">		
 			<%= m.simple_fields_for :doctors do |p| %>
 				<%= p.input :image, as: :file, input_html: {"onchange" => "previewFile()"} %>
 				<%= p.input :name, input_html: { "ng-model" => "name", "ng-init" => "name='#{p.object.name}'"  } %>	
 				<%= p.input :speciality, input_html: {"ng-model" => "speciality", "ng-init" => "speciality='#{p.object.speciality}'"} %>
-				<%= p.input :bio, input_html: { "ng-model" => "bio", "ng-init" => "bio='#{p.object.bio}'"} %>		
+				<%= p.input :bio, :as => :text,  input_html: { "ng-model" => "bio", "ng-init" => "bio='#{p.object.bio}'", "rows" => 10} %>	
+
 			<% end %>
 		</div>	
 	</div><!--  col-md-4 -->

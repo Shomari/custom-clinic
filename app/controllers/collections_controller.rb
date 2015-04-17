@@ -13,14 +13,19 @@ class CollectionsController < ApplicationController
 			end
 		else
 			@doctor = @collection.doctors.last
-			@offices = @collection.offices.last
+			@offices = @collection.offices.last			
 			@reminders = @collection.reminders.last(10).to_a
+			(10 - @collection.reminders.count).times do
+				@reminders << @collection.reminders.build
+			end
+			binding.pry
 		end
 		# @collection = Collection.new
 	
 	end
 
 	def create
+		binding.pry
 		a= Collection.create(collection_params)
 		a.user = current_user
 		a.save!
@@ -30,8 +35,15 @@ class CollectionsController < ApplicationController
 	end
 
 	def update
-		binding.pry
+		# data = params[:collection][:doctors_attributes]["0"][:preview]
+		# jpeg  = Base64.decode64(data['data:image/jpeg;base64,'.length .. -1])
+		# File.open('app/assets/images/test.jpg', 'wb') { |f| f.write(jpeg) }
+
 		collection = Collection.find(params[:id])
+		doc = collection.doctors.last
+
+		# MovieWorker.perform_async()
+
 		collection.update_attributes(collection_params)
 		render :nothing => true
 	end

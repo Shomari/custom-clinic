@@ -1,15 +1,26 @@
-<div class="col-md-6 col-md-offset-1 preview-standard">
-	<div class="row">
-		<div class="col-md-5">
-				<h1>{{name}}</h1>
-				<h3>{{speciality}}</h3>
-				<p>{{bio}}</p>
-				<% if doctor != nil %>
-					<%= image_tag doctor.image_url %>
-				<% else %>
-					<img style="display:none;" src="" height="200" alt="Image preview...">
-				<% end %>
+	<div class="col-md-7 preview-standard">
+		<div class="row">
+			<div class="col-md-5 col-md-offset-1">
+					<% if doctor != nil %>
+						<%= image_tag doctor.image_url %>
+					<% else %>
+						<img style="display:none;" src="" alt="Image preview...">
+					<% end %>
+			</div>
+			<div class="col-md-5" id="doctor-box">
+				<div class="row doctor-text" id="doctor-name">
+					<h1>{{name}}</h1>
+				</div>
+				<div class="row doctor-text" id="doctor-speciality">
+					<h3>{{speciality}}</h3>
+				</div>
+				<div class="row doctor-text" id="doctor-bio">
+					<p>{{bio}}</p>
+				</div>
+			</div>
+		</div> <!-- row -->
 
-		</div>
-	</div> <!-- row -->
-</div>
+	</div>
+
+
+

@@ -3,7 +3,7 @@ class CreateDoctors < ActiveRecord::Migration
     create_table :doctors do |t|
     	t.string :name
     	t.string :speciality
-    	t.string :bio
+    	t.text :bio
     	t.string :image
 
     	t.belongs_to :collection
