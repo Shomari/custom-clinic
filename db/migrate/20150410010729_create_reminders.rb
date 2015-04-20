@@ -3,7 +3,7 @@ class CreateReminders < ActiveRecord::Migration
     create_table :reminders do |t|
     	t.integer :position
 			t.string :heading
-			t.string :message
+			t.text :message
     	t.belongs_to :collection
     	
       t.timestamps null: false

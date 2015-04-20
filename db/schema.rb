@@ -47,10 +47,10 @@ ActiveRecord::Schema.define(version: 20150410010822) do
   create_table "reminders", force: :cascade do |t|
     t.integer  "position",      limit: 4
     t.string   "heading",       limit: 255
-    t.string   "message",       limit: 255
+    t.text     "message",       limit: 65535
     t.integer  "collection_id", limit: 4
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "users", force: :cascade do |t|

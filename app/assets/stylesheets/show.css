@@ -1,4 +1,6 @@
-body{
+.container{
+	border-style: solid;
+	border-color: gray;
 }
 
 img{
@@ -15,6 +17,10 @@ img{
 .temp{
 	border-color: red;
 	border-style: solid; 
+}
+
+.tab-content{
+	padding: 4px;
 }
 
 #doctor_page{
@@ -46,30 +52,49 @@ img{
 }
 
 .hours-table{
-	margin-left: 200px;
-	margin-top: 100px;	
+	margin-top: 100px;
 }
 
-td{
-	padding-right: 40px;
+td h3{
+	margin-bottom: 0px;
+	margin-top: 10px; 
+	font-size: 300%;
 }
 
 tr td:first-child{
+	font-family: "Courier";
+	padding-right: 40px;
 	color: #D9B2FB;
 }
 
 tr td:nth-child(2){
+	font-family: "Helvetica";
 	color: #FFFFFF;
+	width: 600px;
 }
 
 
 .preview-standard{
 	background-image: url('/assets/CMH_template001.jpg');
-	width: 850px;
+	background-size: 100% 100%;	
+	width: 865px;
+	height: 550px;
+}
+
+.preview-standard-reminder{
+	background-size: 100% 100%;
+	background-image: url('/assets/reminder_001.jpg');
+	width: 875px;
 	height: 550px;
 }
 
 #heading{
 	margin-top: 80px;
 	color: #D9B2FB;
+	font-size: 300%;
+}
+
+#message{
+	font-size: 250%;
+	color: white;
 }

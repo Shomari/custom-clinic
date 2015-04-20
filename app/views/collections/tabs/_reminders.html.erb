@@ -14,8 +14,8 @@
 			<div class="tab-pane first" id="<%= p.index %>">
 				<div class="row">
 					<div class="col-md-3">
-					<%= p.input :heading, input_html: {"ng-model" => "heading_#{p.index}", "ng-init" => "heading='#{p.object.heading}'" } %>
-					<%= p.input :message, input_html: {"ng-model" => "message_#{p.index}", "ng-init" => "message='#{p.object.message}'" } %>
+					<%= p.input :heading, input_html: {"ng-model" => "heading_#{p.index}", "ng-init" => "heading_#{p.index}='#{p.object.heading}'" } %>
+					<%= p.input :message, :as => :text, input_html: {"ng-model" => "message_#{p.index}", "ng-init" => "message_#{p.index}='#{p.object.message}'", "rows" => 10 } %>
 					</div>
 					<%= render partial: "themes/standard/reminder_preview.html.erb", locals: {heading: "heading_#{p.index}", message: "message_#{p.index}"} %>
 

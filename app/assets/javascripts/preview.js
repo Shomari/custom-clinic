@@ -4,7 +4,7 @@ function previewFile() {
   var reader  = new FileReader();
 
   reader.onloadend = function () {
-    $('img').toggle();
+    $('img').show();
     console.log()
     preview.src = reader.result;
   }
