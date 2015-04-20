@@ -11,12 +11,15 @@
 
 <div class="tab-content">	
 <%= m.simple_fields_for :reminders, @reminders do |p| %>
-
 			<div class="tab-pane first" id="<%= p.index %>">
-					<%= p.input :heading, input_html: {"ng-init" => "heading='#{p.object.heading}'" } %>
-					<%= p.input :message %>
+				<div class="row">
+					<div class="col-md-3">
+					<%= p.input :heading, input_html: {"ng-model" => "heading_#{p.index}", "ng-init" => "heading='#{p.object.heading}'" } %>
+					<%= p.input :message, input_html: {"ng-model" => "message_#{p.index}", "ng-init" => "message='#{p.object.message}'" } %>
+					</div>
+					<%= render partial: "themes/standard/reminder_preview.html.erb", locals: {heading: "heading_#{p.index}", message: "message_#{p.index}"} %>
+
+					</div>
 			</div>
-
-
 			<% end %>
 </div>

@@ -42,12 +42,34 @@ img{
 }
 
 #doctor-bio{
-	
+
+}
+
+.hours-table{
+	margin-left: 200px;
+	margin-top: 100px;	
+}
+
+td{
+	padding-right: 40px;
+}
+
+tr td:first-child{
+	color: #D9B2FB;
+}
+
+tr td:nth-child(2){
+	color: #FFFFFF;
 }
 
 
 .preview-standard{
 	background-image: url('/assets/CMH_template001.jpg');
-	width: 875px;
+	width: 850px;
 	height: 550px;
+}
+
+#heading{
+	margin-top: 80px;
+	color: #D9B2FB;
 }

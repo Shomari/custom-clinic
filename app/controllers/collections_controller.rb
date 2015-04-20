@@ -18,14 +18,12 @@ class CollectionsController < ApplicationController
 			(10 - @collection.reminders.count).times do
 				@reminders << @collection.reminders.build
 			end
-			binding.pry
 		end
 		# @collection = Collection.new
 	
 	end
 
 	def create
-		binding.pry
 		a= Collection.create(collection_params)
 		a.user = current_user
 		a.save!
@@ -51,7 +49,7 @@ class CollectionsController < ApplicationController
 	private
 
 		def collection_params
-			days = [:monday, :tuesday, :wednesday, :thursday, :friday, :saaturday, :sunday]
+			days = [:monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday] 
 			params.require(:collection).permit(doctors_attributes: [ :id, :image, :name, :speciality, :bio], offices_attributes: days, reminders_attributes: [:heading, :message] )
 		end
 

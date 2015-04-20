@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20150410010822) do
     t.string   "monday",        limit: 255
     t.string   "tuesday",       limit: 255
     t.string   "wednesday",     limit: 255
-    t.string   "thrusday",      limit: 255
+    t.string   "thursday",      limit: 255
     t.string   "friday",        limit: 255
     t.string   "saturday",      limit: 255
     t.string   "sunday",        limit: 255

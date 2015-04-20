@@ -5,7 +5,7 @@ class CreateOffices < ActiveRecord::Migration
     	t.string :monday
     	t.string :tuesday
     	t.string :wednesday
-    	t.string :thrusday
+    	t.string :thursday
     	t.string :friday
     	t.string :saturday
     	t.string :sunday
