@@ -1,14 +1,42 @@
-<div class="row" id="doctor_page">
-	<div class="col-md-3">
-		<div class="row">		
-			<%= m.simple_fields_for :doctors do |p| %>
-				<%= p.input :image, as: :file, input_html: {"onchange" => "previewFile()"} %>
-				<%= p.input :name, input_html: { "ng-model" => "name", "ng-init" => "name='#{p.object.name}'"  } %>	
-				<%= p.input :speciality, input_html: {"ng-model" => "speciality", "ng-init" => "speciality='#{p.object.speciality}'"} %>
-				<%= p.input :bio, :as => :text,  input_html: { "ng-model" => "bio", "ng-init" => "bio='#{p.object.bio}'", "rows" => 10} %>	
+<% doctor_index = 1 %>
+<div class="row">
+	<ul class="nav nav-tabs">
+		<li class="active"><a data-toggle="tab" href="#doctor_0">1</a></li>
+		<% 4.times do %>
+			<li><a data-toggle="tab" href="#doctor_<%= doctor_index %>"><%= doctor_index + 1 %></a></li>
+			<% doctor_index += 1 %>
+		<% end %>
+	</ul>
+</div>
 
-			<% end %>
-		</div>	
-	</div><!--  col-md-4 -->
-		<%= render partial: "themes/standard/doctor_preview.html.erb", locals: {doctor: @doctor} %>
-</div>  <!-- row -->
+<div class="tab-content" id="doctor-tab">
+	<div class="row">
+		<div class="col-md-2">
+			
+		</div>
+		<div class="col-md-4">
+
+		<audio src=<%= asset_path "assets/bensound-acousticbreeze.mp3" %> type="audio/mpeg" controls>
+			Your browser does not support the audio element.
+		</audio>
+		</div>
+	</div> <!-- row -->
+
+
+	<%= m.simple_fields_for :doctors, @doctors do |d| %>
+	<div class="tab-pane doctor-tab" id="doctor_<%= d.index %>">
+		<div class="row" id="doctor_page">
+			<div class="col-md-3">
+				<div class="row">		
+						<%= d.input :image, as: :file, input_html: {"onchange" => "previewFile(#{d.index})"} %>
+						<%= d.input :name, input_html: { "ng-model" => "name_#{d.index}", "ng-init" => "name_#{d.index}='#{d.object.name}'"  } %>	
+						<%= d.input :speciality, input_html: {"ng-model" => "speciality_#{d.index}", "ng-init" => "speciality_#{d.index}='#{d.object.speciality}'"} %>
+						<%= d.input :bio, :as => :text,  input_html: { "ng-model" => "bio_#{d.index}", "ng-init" => "bio_#{d.index}='#{d.object.bio}'", "rows" => 10} %>
+				</div>	
+			</div><!--  col-md-4 -->
+			<%= render partial: "themes/standard/doctor_preview.html.erb", locals: {doctor: d.object, name: "name_#{d.index}", speciality: "speciality_#{d.index}", bio: "bio_#{d.index}", index: "#{d.index}"} %>
+		</div>  <!-- row -->
+	</div>
+	
+	<% end %>
+</div>

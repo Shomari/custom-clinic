@@ -1,10 +1,10 @@
-<% i = 1 %>
+<% reminder_index = 1 %>
 <div class="row">
 	<ul class="nav nav-tabs">
 		<li class="active"><a data-toggle="tab" href="#0">1</a></li>
 		<% 9.times do %>
-			<li><a data-toggle="tab" href="#<%= i %>"><%= i + 1 %></a></li>
-			<% i += 1 %>
+			<li><a data-toggle="tab" href="#<%= reminder_index %>"><%= reminder_index + 1 %></a></li>
+			<% reminder_index += 1 %>
 		<% end %>
 	</ul>
 </div>

@@ -1,21 +1,21 @@
 	<div class="col-md-7 preview-standard">
 		<div class="row">
-			<div class="col-md-5 col-md-offset-1">
+			<div class="col-md-5 col-md-offset-1" id="doctor-image">
 					<% if doctor != nil %>
-						<%= image_tag doctor.image_url %>
+						<%= image_tag doctor.image_url, id: "image_#{index}" %>
 					<% else %>
 						<img style="display:none;" src="" alt="Image preview...">
 					<% end %>
 			</div>
 			<div class="col-md-5" id="doctor-box">
 				<div class="row doctor-text" id="doctor-name">
-					<h1>{{name}}</h1>
+					<h1><span ng-bind=<%= name %>></span></h1>
 				</div>
 				<div class="row doctor-text" id="doctor-speciality">
-					<h3>{{speciality}}</h3>
+					<h3><span ng-bind=<%= speciality %>></span></h3>
 				</div>
 				<div class="row doctor-text" id="doctor-bio">
-					<p>{{bio}}</p>
+					<p><span ng-bind=<%= bio %>></span></p>
 				</div>
 			</div>
 		</div> <!-- row -->

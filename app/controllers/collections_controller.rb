@@ -8,12 +8,17 @@ class CollectionsController < ApplicationController
 		# if collection you need a patch route
 		@collection = Collection.find_or_initialize_by(user: current_user)
 		if @collection.id.nil?
-			@collection.doctors.build
 			@collection.offices.build
 		else
-			@doctor = @collection.doctors.last
+			@doctor = @collection.doctors.last(5)
 			@offices = @collection.offices.last			
 		end
+
+		@doctors = @collection.doctors.last(5).to_a
+		(5 - @collection.doctors.count).times do
+				@doctors << @collection.doctors.build
+		end
+
 
 		@reminders = @collection.reminders.last(10).to_a		
 		(10 - @collection.reminders.count).times do

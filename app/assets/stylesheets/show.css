@@ -1,13 +1,44 @@
+@import url(http://fonts.googleapis.com/css?family=Varela);
+@import url(http://fonts.googleapis.com/css?family=Cinzel:900);
+
+body{
+	background-color: #054F99;
+	height:100%;
+}
+
 .container{
 	border-style: solid;
 	border-color: gray;
+	border-radius: 12px;
+	margin-bottom: 10px;
+	background-color: white;
+	padding-bottom: 100px;
 }
 
-img{
-	width: 275px;
-	height: 350px;
-	margin-top: 120px;
+#login-box{
+	padding-bottom: 40px;
+	margin-top: 140px;
+}
 
+#login-box .email{
+	margin-bottom: 2px;
+}
+
+.navbar-brand img{
+	margin-top: -11px;
+}
+
+.navbar-default{
+	background-color: white;
+	border-radius: 0px;
+}
+
+#nav-heading{
+	margin-top: 3px;
+	padding-top: 2px;
+	font-family: 'Cinzel', serif;
+	color: #6F2799;
+	font-weight: 900;
 }
 
 .form-group{
@@ -20,7 +51,7 @@ img{
 }
 
 .tab-content{
-	padding: 4px;
+	padding: 10px;
 }
 
 #doctor_page{
@@ -32,6 +63,12 @@ img{
 }
 
 #doctor-box{
+	margin-top: 120px;
+}
+
+#doctor-image img{
+	width: 275px;
+	height: 350px;
 	margin-top: 120px;
 }
 
@@ -77,14 +114,14 @@ tr td:nth-child(2){
 .preview-standard{
 	background-image: url('/assets/CMH_template001.jpg');
 	background-size: 100% 100%;	
-	width: 865px;
+	width: 800px;
 	height: 550px;
 }
 
 .preview-standard-reminder{
 	background-size: 100% 100%;
 	background-image: url('/assets/reminder_001.jpg');
-	width: 875px;
+	width: 800px;
 	height: 550px;
 }
 

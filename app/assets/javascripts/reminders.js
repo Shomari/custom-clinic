@@ -1,6 +1,5 @@
 $(document).ready(function(){
-	$("#reminder-tab").one("click", function(){
-		$(".first").first().addClass("active");
-	});
+	$(".doctor-tab").first().addClass("active");
+	$(".first").first().addClass("active");	
 });
 

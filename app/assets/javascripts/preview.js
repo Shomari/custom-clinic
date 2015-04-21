@@ -1,12 +1,12 @@
-function previewFile() {
-  var preview = document.querySelector('img');
-  var file    = document.querySelector('input[type=file]').files[0];
+function previewFile(index) {
+  var preview = document.querySelector('#image_'+ index);
+  var file    = document.querySelector('#collection_doctors_attributes_'+index+'_image').files[0];
   var reader  = new FileReader();
 
   reader.onloadend = function () {
-    $('img').show();
-    console.log()
+    $('#image_'+index).show();
     preview.src = reader.result;
+
   }
 
   if (file) {
