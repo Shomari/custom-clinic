@@ -12,7 +12,7 @@
 <div class="tab-content" id="doctor-tab">
 	<div class="row">
 		<div class="col-md-2">
-			
+			<%= m.input :audio, :collection => @tracks, input_html: {"onchange" => "changeTrack()"} %>
 		</div>
 		<div class="col-md-4">
 

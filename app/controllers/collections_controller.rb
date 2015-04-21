@@ -1,6 +1,7 @@
 class CollectionsController < ApplicationController
 	before_filter :authenticate_user!
 
+	TRACKS = ["track_1", "track_2", "track_3"]
 
 	#refactor this, abstract into model class
 	def show
@@ -25,10 +26,12 @@ class CollectionsController < ApplicationController
 				@reminders << @collection.reminders.build
 		end
 		# @collection = Collection.new
-	
+
+		@tracks = TRACKS
 	end
 
 	def create
+		binding.pry
 		a= Collection.create(collection_params)
 		a.user = current_user
 		a.save!
