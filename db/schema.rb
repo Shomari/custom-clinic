@@ -13,58 +13,61 @@
 
 ActiveRecord::Schema.define(version: 20150410010822) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "collections", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "audio",      limit: 255
-    t.integer  "user_id",    limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "name"
+    t.string   "audio"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "doctors", force: :cascade do |t|
-    t.string   "name",          limit: 255
-    t.string   "speciality",    limit: 255
-    t.text     "bio",           limit: 65535
-    t.string   "image",         limit: 255
-    t.integer  "collection_id", limit: 4
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.string   "name"
+    t.string   "speciality"
+    t.text     "bio"
+    t.string   "image"
+    t.integer  "collection_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "offices", force: :cascade do |t|
-    t.string   "name",          limit: 255
-    t.string   "monday",        limit: 255
-    t.string   "tuesday",       limit: 255
-    t.string   "wednesday",     limit: 255
-    t.string   "thursday",      limit: 255
-    t.string   "friday",        limit: 255
-    t.string   "saturday",      limit: 255
-    t.string   "sunday",        limit: 255
-    t.integer  "collection_id", limit: 4
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.string   "name"
+    t.string   "monday"
+    t.string   "tuesday"
+    t.string   "wednesday"
+    t.string   "thursday"
+    t.string   "friday"
+    t.string   "saturday"
+    t.string   "sunday"
+    t.integer  "collection_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "reminders", force: :cascade do |t|
-    t.integer  "position",      limit: 4
-    t.string   "heading",       limit: 255
-    t.text     "message",       limit: 65535
-    t.integer  "collection_id", limit: 4
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.integer  "position"
+    t.string   "heading"
+    t.text     "message"
+    t.integer  "collection_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  limit: 255, default: "", null: false
-    t.string   "encrypted_password",     limit: 255, default: "", null: false
-    t.string   "reset_password_token",   limit: 255
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          limit: 4,   default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip",     limit: 255
-    t.string   "last_sign_in_ip",        limit: 255
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -73,12 +76,12 @@ ActiveRecord::Schema.define(version: 20150410010822) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "videos", force: :cascade do |t|
-    t.string   "name",            limit: 255
-    t.string   "movie",           limit: 255
-    t.integer  "recordable_id",   limit: 4
-    t.string   "recordable_type", limit: 255
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.string   "name"
+    t.string   "movie"
+    t.integer  "recordable_id"
+    t.string   "recordable_type"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   add_index "videos", ["recordable_type", "recordable_id"], name: "index_videos_on_recordable_type_and_recordable_id", using: :btree

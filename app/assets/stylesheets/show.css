@@ -67,6 +67,7 @@ body{
 }
 
 #doctor-image img{
+	display: none;
 	width: 275px;
 	height: 350px;
 	margin-top: 120px;
@@ -114,15 +115,12 @@ tr td:nth-child(2){
 .preview-standard{
 	background-image: url('/assets/CMH_template001.jpg');
 	background-size: 100% 100%;	
-	width: 800px;
+	width: 842px;
 	height: 550px;
 }
 
-.preview-standard-reminder{
-	background-size: 100% 100%;
+#preview-reminder{
 	background-image: url('/assets/reminder_001.jpg');
-	width: 800px;
-	height: 550px;
 }
 
 #heading{
@@ -134,4 +132,8 @@ tr td:nth-child(2){
 #message{
 	font-size: 250%;
 	color: white;
+}
+
+#player{
+	margin-top: 24px;
 }
