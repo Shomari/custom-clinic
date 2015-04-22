@@ -7,9 +7,9 @@ $(document).ready(function(){
 function changeTrack(){
 	var selected = $("#collection_audio option:selected").text();
 	if(selected == "track_1"){
- 	 $("audio").attr("src", "/assets/bensound-acousticbreeze.mp3");
+ 	 $("audio").attr("src", "/bensound-acousticbreeze.mp3");
 	} else {
- 	 $("audio").attr("src", "/asset/different_track");		
+ 	 $("audio").attr("src", "/audio405188-NORMALIZED.mp3");		
 	}
 
 };
