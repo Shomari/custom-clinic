@@ -2,7 +2,7 @@
 		<div class="row">
 			<div class="col-md-5 col-md-offset-1" id="doctor-image">
 					<% if doctor != nil %>
-						<%= image_tag doctor.image_url, id: "image_#{index}" %>
+						<%= image_tag doctor.image, id: "image_#{index}" %>
 					<% else %>
 						<img style="display:none;" src="" alt="Image preview...">
 					<% end %>

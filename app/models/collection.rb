@@ -8,3 +8,7 @@ class Collection < ActiveRecord::Base
 	accepts_nested_attributes_for :reminders
 	accepts_nested_attributes_for :offices
 end
+
+def make_doctor_hash
+	doctors
+end

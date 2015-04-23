@@ -30,7 +30,7 @@ gem 'devise'
 gem 'simple_form'
 
 gem 'carrierwave'
-gem "mini_magick"
+gem 'rmagick'
 
 gem 'sidekiq'
 gem 'sinatra', require: false

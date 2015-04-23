@@ -8,7 +8,7 @@ function changeTrack(){
 	var selected = $("#collection_audio option:selected").text();
 	var track1 = "<%= asset_path('bensound-acousticbreeze.mp3') %>";	
 	var track2 = "<%= asset_path('audio405188-NORMALIZED.mp3') %>";
-	if(selected == "track_1"){
+	if(selected == "Track 1"){
  	 $("audio").attr("src", track1);
 	} else {
  	 $("audio").attr("src", track2);		
