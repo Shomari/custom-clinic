@@ -44,13 +44,23 @@ class CollectionsController < ApplicationController
 
 	def update
 		updates = []
+		avatars = []
+
 		### checking doctors for updates
 		params[:collection][:doctors_attributes].each_with_index do |doctor, index|
+			image_params = params[:collection][:doctors_attributes][index.to_s]["image"]
+			
 			doc = doctor[1].to_hash
-			binding.pry
 			doc["image"] = doc["image"].original_filename unless doc["image"].blank?
 		  updates << index.to_s unless Doctor.where(doc).present?
+		  if image_params != nil
+		  	avatars << image_params.tempfile.path
+		  else
+		  	avatars << nil
+		  end
 		end
+
+
 
 		### checking office for updates
 		office = params[:collection][:offices_attributes]["0"].to_hash
@@ -63,9 +73,8 @@ class CollectionsController < ApplicationController
 			reminder_updates << index.to_s unless Reminder.where(remind).present?
 		end
 
-		binding.pry
 
-		ImageWorker.perform_async(updates, office_update, reminder_updates, params)
+		ImageWorker.perform_async(updates, avatars, office_update, reminder_updates, params)
 
 		collection = Collection.find(params[:id])
 		collection.update_attributes(collection_params)
