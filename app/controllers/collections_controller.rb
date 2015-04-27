@@ -73,11 +73,12 @@ class CollectionsController < ApplicationController
 			reminder_updates << index.to_s unless Reminder.where(remind).present?
 		end
 
+		collection = Collection.find(params[:id])
+		collection.update_attributes(collection_params)
 
 		ImageWorker.perform_async(updates, avatars, office_update, reminder_updates, params)
 
-		collection = Collection.find(params[:id])
-		collection.update_attributes(collection_params)
+		
 		render :nothing => true
 	end
 

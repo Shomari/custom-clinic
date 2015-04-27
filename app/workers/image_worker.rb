@@ -5,6 +5,7 @@ class ImageWorker
 	include Sidekiq::Worker
 
 	def perform(updates, avatars, office_updates, reminder_updates, params)
+
 		updates.each do |number|
 			name = params["collection"]["doctors_attributes"][number]["name"]
 			speciality = params["collection"]["doctors_attributes"][number]["speciality"]
@@ -16,17 +17,32 @@ class ImageWorker
 			make_doctor_images(name, speciality, bio, id, avatar)			
 		end
 
-		office_id = params[:collection][:offices_attributes]["0"]["id"]
-		make_office_images(params[:collection][:offices_attributes]["0"], office_id) if office_updates == true
+
+		office_id = params["collection"]["offices_attributes"]["0"]["id"]
+		make_office_images(params["collection"]["offices_attributes"]["0"], office_id) if office_updates == true
 			# make_reminder_images
+
+		reminder_updates.each do |number|
+			heading = params["collction"]["reminders_attributes"][number]["heading"]
+			message = params["collction"]["reminders_attributes"][number]["message"]
+			make_reminder_images(heading, message)
+		end
 	end
 
 	def make_doctor_images(name, speciality, bio, id, avatar)
-		unless avatar.blank?
-			avatar = ImageList.new(avatar).last
-		else
-			avatar = Doctor.find(id).image
-		end
+		# doctor = Doctor.find(id)
+		# if Doc
+		# unless avatar.blank?
+		# 	binding.pry
+		# 	"uploads/doctor/image/id"
+		# 	avatar = ImageList.new(avatar).last
+		# else
+		# 	avatar = Doctor.find(id).image
+		# end
+
+		avatar = Doctor.find(id).image
+
+		avatar = Image.read(avatar.file.file).last
 
 		background =  ImageList.new('app/assets/images/CMH_template001.jpg')
 		avatar = avatar.resize_to_fit(700,500)
@@ -40,9 +56,14 @@ class ImageWorker
 		days_hash.update(days_hash) do |key, value|
 			value = create_section_image(value, "#FFFFFF", 'Helvetica-Bold', 60, "500x200", "none")
 		end
-		background = ImageList.new('app/assets/images/hours-template001.jgp')
+		background = ImageList.new('app/assets/images/hours_template001.jpg')
 		flatten_office_image(background, days_hash, office_id)
-	end		
+	end	
+
+	def make_reminder_images(heading, message)
+		background = ImageList.new('app/assets/images/reminder_001.jpg')
+		create_section_image
+	end	
 
 	def create_section_image(text, fill, font, pointsize, size, background_color)
 		Magick::Image.read("caption:#{text}"){
@@ -59,20 +80,24 @@ class ImageWorker
 		final = final.composite(name_img, 550, 175, AtopCompositeOp)
 		final = final.composite(speciality_img, 550, 250, AtopCompositeOp )
 		final = final.composite(bio_img, 550, 315, AtopCompositeOp )
-		random = "random number"
-		final.write("tmp/images/yay.jpg")
-		VideoWorker.perform_async(random, doctor_id)
+		random = SecureRandom.hex
+		type = "doctor"
+		final.write("tmp/images/#{random}.jpg")
+		MovieWorker.perform_async(random, doctor_id, type)
 	end
 
 	def flatten_office_image(background, days_img_hash, office_id)
-		final = background.composite(days_img_hash[:monday], 850, 175, AtopCompositeOp )
-		final = final.composite(arr[:tuesday], 850, 275, AtopCompositeOp)
-		final = final.composite(arr[:wednesday], 850, 375, AtopCompositeOp)
-		final = final.composite(arr[:thursday], 850, 475, AtopCompositeOp)
-		final = final.composite(arr[:friday], 850, 575, AtopCompositeOp)
-		final = final.compositeq(arr[:saturday], 850, 675, AtopCompositeOp)
-		final = final.composite(arr[:sunday], 850, 775, AtopCompositeOp)
-		final.write("tmp/images/office.jpg"){self.quality = 100}
-		VideoWorker.perform_async(random, office_id)
+		binding.pry
+		final = background.composite(days_img_hash["monday"], 700, 75, AtopCompositeOp )
+		final = final.composite(days_img_hash["tuesday"], 700, 150, AtopCompositeOp)
+		final = final.composite(days_img_hash["wednesday"], 700, 250, AtopCompositeOp)
+		final = final.composite(days_img_hash["thursday"], 700, 325, AtopCompositeOp)
+		final = final.composite(days_img_hash["friday"], 700, 450, AtopCompositeOp)
+		final = final.composite(days_img_hash["saturday"], 700, 525, AtopCompositeOp)
+		final = final.composite(days_img_hash["sunday"], 700, 650, AtopCompositeOp)
+		random = SecureRandom.hex
+		type = "office"
+		final.write("tmp/images/#{random}.jpg"){self.quality = 100}
+		MovieWorker.perform_async(random, office_id, type)
 	end
 end

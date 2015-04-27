@@ -6,35 +6,32 @@ class MovieWorker
 
 	
 
-	def perform(name)
-		image_list(name)
+	def perform(random, id, type)
+		
 		# source = MiniMagick::Image.open('app/assets/images/test.jpg')
-		# video = Video.new
-		# filename = "app/assets/video_tem4p/movie.mp4"
-		# `ffmpeg -framerate 1/5 -i "#{source.path}" -i app/assets/images/bensound-funnysong.mp3 -shortest -c:v libx264 -map 0:0 -map 1:0 -pix_fmt yuv420p app/assets/video_temp/movie.mp4`
+		video = Video.new
+		output = "app/assets/video_temp/#{random}.mp4"
+		`ffmpeg -framerate 1/8 -i tmp/images/#{random}.jpg -i app/assets/images/bensound-funnysong.mp3 -shortest -map 0:0 -map 1:0 -c:v libx264 -pix_fmt yuv420p #{output}`
 
+		File.open(output) do |f|
+			video.movie = f
+		end
 
-		# File.open("app/assets/video_temp/movie.mp4") do |f|
-		# 	video.movie = f
-		# end
-
-		# video.save!
-		# binding.pry
-		# VideoMailer.sample_email(video.movie).deliver
+		save_video(id, type)		
+		VideoMailer.sample_email(video.movie).deliver
 	end
 
-	def image_list(name)
-		img =  ImageList.new('app/assets/images/CMH_template001.jpg')
-		doc = Magick::Image.read("caption:#{name}"){
-		self.fill = '#D9B2FB'
-		self.font = "Helvetica-Bold"
-		self.pointsize = 64
-		self.size = "600x100"
-		self.background_color = "none"
-	}.first
-
-	final = img.composite(doc, 700, 300, AtopCompositeOp)
-	binding.pry
-
-	end
+	def save_video(id, type)
+		case type
+		when "doctor"
+			doctor = Doctor.find(id)
+			Video.create(recordable: doctor)
+		when "office"
+			office = Office.find(id)
+			Video.create(recordable: office)
+		when "reminder"
+			reminder = Reminder.find(id)
+			Video.create(recordable: reminder)
+		end
+	end	
 end
