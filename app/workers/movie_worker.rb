@@ -6,12 +6,12 @@ class MovieWorker
 
 	
 
-	def perform(random, id, type)
+	def perform(random, id, type, audio)
 		
 		# source = MiniMagick::Image.open('app/assets/images/test.jpg')
 		video = Video.new
 		output = "app/assets/video_temp/#{random}.mp4"
-		`ffmpeg -framerate 1/8 -i tmp/images/#{random}.jpg -i app/assets/images/bensound-funnysong.mp3 -shortest -map 0:0 -map 1:0 -c:v libx264 -pix_fmt yuv420p #{output}`
+		`ffmpeg -framerate 1/8 -i tmp/images/#{random}.jpg -i #{audio} -shortest -map 0:0 -map 1:0 -profile:v baseline -c:v libx264 -pix_fmt yuv420p #{output}`
 
 		File.open(output) do |f|
 			video.movie = f
