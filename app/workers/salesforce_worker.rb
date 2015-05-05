@@ -5,7 +5,7 @@ class SalesforceWorker
 	### Also pass in link to where video is saved in asset
   ### Subject is the date and time created
 
-	def perform
+	def perform(clinic_id, file)
 		client = Restforce.new :host => 'test.salesforce.com',
 			:username       => ENV["sf_username"],
 		  :password       => ENV["sf_password"],
@@ -14,9 +14,9 @@ class SalesforceWorker
 		  :client_secret  => ENV["sf_client_secret"]
 
 		  #need to pass in account
-		  account = client.find('Account', '30431', 'CMHID__c')
+		  account = client.find('Account', clinic_id, 'CMHID__c')
 		  account_id = account.Id
-		  client.create!('Case', Subject: "#{Time.now}", Priority: 'Low', AccountId: account_id, Description: "www.link" )
+		  client.create!('Case', Subject: "#{Time.now}", Priority: 'Low', AccountId: account_id, Description: file )
 
 	end
 end

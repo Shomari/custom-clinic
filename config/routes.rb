@@ -3,10 +3,12 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
   devise_for :users
 
-  root 'collections#show'
+  get '/collection', to: 'collections#show', as: 'show_collection'
+  post '/verify', to: 'admin#verify'
+
+  root 'admin#index'
 
   resources :collections
-
   resources :doctor
 
   mount Sidekiq::Web, at: '/sidekiq'

@@ -3,7 +3,6 @@ class MovieWorker
 	require 'RMagick'
 	include Magick
 	include Sidekiq::Worker
-
 	
 
 	def perform(random, id, type, audio)
@@ -18,13 +17,12 @@ class MovieWorker
 			video.movie = f
 		end
 
-		save_video(id, type)		
+		clinic_id = save_video(id, type)		
 		VideoMailer.sample_email(video.movie).deliver
-		s3_upload(output)
-		File.delete(output)
+		s3_upload(output, clinic_id)
 	end
 
-	def s3_upload(file_path)
+	def s3_upload(file_path, clinic_id)
 		connection = Fog::Storage.new({
 			:provider               => 'AWS',
 			:aws_access_key_id      =>  ENV["aws_access_key"],
@@ -39,20 +37,28 @@ class MovieWorker
 			:body     => File.open(file_path),
 			:public   => true
 			)
-		SalesforceWorker.perform_async
+
+		url = file.url(0)[/.+?(?=\?)/]
+		File.delete(file_path)
+
+		SalesforceWorker.perform_async(clinic_id, url)
 	end
 
+	### Saving video to the database and returning the clinic id to make a SF case with it
 	def save_video(id, type)
 		case type
 		when "doctor"
 			doctor = Doctor.find(id)
 			Video.create(recordable: doctor)
+			doctor.collection.clinic_id
 		when "office"
 			office = Office.find(id)
 			Video.create(recordable: office)
+			office.collection.clinic_id
 		when "reminder"
 			reminder = Reminder.find(id)
 			Video.create(recordable: reminder)
+			reminder.collection.clinic_id
 		end
 	end	
 end

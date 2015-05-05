@@ -23,6 +23,8 @@ gem 'carrierwave_backgrounder'
 gem 'rmagick'
 gem 'fog'
 gem 'figaro'
+gem 'cancancan', '~> 1.10'
+gem 'lodash-rails'
 
 gem 'restforce'
 gem 'active_force'

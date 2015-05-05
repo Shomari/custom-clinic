@@ -1,0 +1,8 @@
+  <% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
+  <% end %>
+
+
+<%= form_tag('/verify') %>
+<%= text_field_tag 'clinic_id' %>
+<%= submit_tag %>

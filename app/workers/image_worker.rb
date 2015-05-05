@@ -8,7 +8,6 @@ class ImageWorker
 
 		collection = Collection.find(collection_id)
 		audio = get_audio_track(params["collection"]["audio"])		
-		binding.pry
 		updates.each do |number|
 			name           = params["collection"]["doctors_attributes"][number]["name"]
 			speciality     = params["collection"]["doctors_attributes"][number]["speciality"]
@@ -92,6 +91,9 @@ class ImageWorker
 
 		random    = SecureRandom.hex
 		type      = "doctor"
+		binding.pry
+		# File.delete(avatar)
+
 		final.write("tmp/images/#{random}.jpg")
 		MovieWorker.perform_async(random, doctor_id, type, audio)
 	end

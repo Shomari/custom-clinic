@@ -15,4 +15,5 @@
 //= require twitter/bootstrap
 //= require turbolinks
 //= require angular
+//= require lodash
 //= require_tree .

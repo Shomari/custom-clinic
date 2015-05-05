@@ -9,6 +9,7 @@
 	<div class="tab-content">
 		<div class="tab-pane active" id="doctor">
 		<%= simple_form_for @collection, html: {multipart: true, id: "form"} do |m| %>
+		<%= m.input :clinic_id, as: :hidden, input_html: { value:  @clinic_id} %>
 		
 			<%= render partial: "collections/tabs/doctor", locals: { :m => m } %>
 		</div>

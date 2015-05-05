@@ -1,7 +1,34 @@
 $(document).ready(function(){
 	$(".doctor-tab").first().addClass("active");
-	$(".first").first().addClass("active");	
+	$(".first").first().addClass("active");
+	window.doctors = $(".docs").data('count')	|| 0
+	
+	window.max = [0,1,2,3,4]
+	window.ind = countDoctors(doctors)
+	window.remainders = _.difference(max, ind)
+	showDoctors(ind)
 });
+
+function countDoctors(doctors){
+	var index = []
+ 	for (var i=0; i < doctors.length; i++){
+ 		if (doctors[i].name !== "" && doctors[i].speciality !== "" && doctors[i].bio !== ""){
+ 			index.push(i);  					
+ 		}
+ 	}  	
+ return index;
+}
+
+function showDoctors(index){
+	for (var i=0; i < index.length; i++){
+		$("#doc_tab_"+i).removeClass("hidden");
+	}
+}
+
+function addDoctor(){
+	var adds = remainders.shift(1)
+	$("#doc_tab_"+adds).removeClass("hidden");
+}
 
 //this is hacky
 function changeTrack(){
@@ -13,6 +40,8 @@ function changeTrack(){
 	} else {
  	 $("audio").attr("src", track2);		
 	}
-
 };
+
+
+
 

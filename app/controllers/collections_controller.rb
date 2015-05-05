@@ -8,9 +8,10 @@ class CollectionsController < ApplicationController
 
 	#refactor this, abstract into model class
 	def show
+		@clinic_id = session[:clinic_id].to_i
 		# if no collection, then cna't build last doctor
 		# if collection you need a patch route
-		@collection = Collection.find_or_initialize_by(user: current_user)
+		@collection = Collection.find_or_initialize_by(clinic_id: session[:clinic_id].to_i)
 		if @collection.id.nil?
 			@collection.offices.build
 		else
@@ -34,6 +35,8 @@ class CollectionsController < ApplicationController
 	end
 
 	def create
+		binding.pry
+
 		collection =  empty_collection ### helper ###
 
 		doctor_updates   = collection.check_for_doctor_updates(params)
@@ -50,7 +53,6 @@ class CollectionsController < ApplicationController
 		  	avatars << nil
 		  end
 		end
-
 		collection = Collection.create(collection_params)
 		collection_id = collection.id
 
@@ -89,7 +91,7 @@ class CollectionsController < ApplicationController
 
 		def collection_params
 			days = [:monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday] 
-			params.require(:collection).permit(doctors_attributes: [ :id, :image, :name, :speciality, :bio], offices_attributes: days, reminders_attributes: [:heading, :message] )
+			params.require(:collection).permit(:clinic_id, doctors_attributes: [ :id, :image, :name, :speciality, :bio], offices_attributes: days, reminders_attributes: [:heading, :message] )
 		end
 
 		### can't use this method in the model because I can't pass the carrierwave image

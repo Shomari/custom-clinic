@@ -1,5 +1,16 @@
 module ApplicationHelper
 
+	def get_salesforce_client
+		client = Restforce.new :host => 'test.salesforce.com',
+			:username       => ENV["sf_username"],
+		  :password       => ENV["sf_password"],
+		  :security_token => ENV["sf_security_token"],
+		  :client_id      => ENV["sf_client_id"],
+		  :client_secret  => ENV["sf_client_secret"]
+
+		  client
+	end
+
 	def empty_collection
 		empty_hash = 
 		  {"audio"=>"Track 1",
