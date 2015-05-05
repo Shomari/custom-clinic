@@ -34,9 +34,13 @@ class Collection < ActiveRecord::Base
 	end
 
 	def check_for_office_updates(params)
-		office = params[:collection][:offices_attributes]["0"].to_hash
-		office[:collection_id] = self.id
-		Office.where(office).present? ? false : true
+		office = params[:collection][:offices_attributes]["0"].to_hash		
+		office["collection_id"] = self.id
+		if self.id == nil
+			office.values == ["", "", "", "", "", "", "", nil] ? false : true   ### Check for any input when a new office is created
+		else
+			Office.where(office).present? ? false : true                        ### Check for any changes on an existing office
+		end
 	end
 
 
@@ -48,7 +52,11 @@ class Collection < ActiveRecord::Base
 		params[:collection][:reminders_attributes].each_with_index do |reminder, index|
 			remind = reminder[1].to_hash
 			remind[:collection_id] = self.id
-			reminder_updates << index.to_s unless Reminder.where(remind).present?
+			if self.id == nil
+				reminder_updates << index.to_s unless remind["message"].blank? && remind["heading"].blank?  ### When creating a new collection
+			else
+				reminder_updates << index.to_s unless Reminder.where(remind).present?                       ### When updating an exisiting collection
+			end
 		end
 		reminder_updates
 	end
