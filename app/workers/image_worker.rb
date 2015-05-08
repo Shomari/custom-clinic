@@ -99,13 +99,13 @@ class ImageWorker
 	end
 
 	def flatten_office_image(background, days_img_hash, office_id, audio)
-		final = background.composite(days_img_hash["monday"], 700, 75, AtopCompositeOp )
-		final = final.composite(days_img_hash["tuesday"], 700, 150, AtopCompositeOp)
-		final = final.composite(days_img_hash["wednesday"], 700, 250, AtopCompositeOp)
-		final = final.composite(days_img_hash["thursday"], 700, 325, AtopCompositeOp)
-		final = final.composite(days_img_hash["friday"], 700, 450, AtopCompositeOp)
-		final = final.composite(days_img_hash["saturday"], 700, 525, AtopCompositeOp)
-		final = final.composite(days_img_hash["sunday"], 700, 650, AtopCompositeOp)
+		final = background.composite(days_img_hash["monday"], 850, 143, AtopCompositeOp )
+		final = final.composite(days_img_hash["tuesday"], 850, 223, AtopCompositeOp)
+		final = final.composite(days_img_hash["wednesday"], 850, 308, AtopCompositeOp)
+		final = final.composite(days_img_hash["thursday"], 850, 494, AtopCompositeOp)
+		final = final.composite(days_img_hash["friday"], 850, 477, AtopCompositeOp)
+		final = final.composite(days_img_hash["saturday"], 850, 561, AtopCompositeOp)
+		final = final.composite(days_img_hash["sunday"], 850, 646, AtopCompositeOp)
 
 		random = SecureRandom.hex
 		type = "office"

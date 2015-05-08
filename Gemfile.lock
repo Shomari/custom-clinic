@@ -85,6 +85,11 @@ GEM
     erubis (2.7.0)
     excon (0.45.1)
     execjs (2.5.2)
+    factory_girl (4.5.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.5.0)
+      factory_girl (~> 4.5.0)
+      railties (>= 3.0.0)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.9.1)
@@ -216,13 +221,13 @@ GEM
     minitest (5.5.1)
     multi_json (1.11.0)
     multipart-post (2.0.0)
+    mysql2 (0.3.18)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.2)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     orm_adapter (0.5.0)
-    pg (0.18.1)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -321,6 +326,8 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    shoulda-matchers (2.8.0)
+      activesupport (>= 3.0.0)
     sidekiq (3.3.3)
       celluloid (>= 0.16.0)
       connection_pool (>= 2.1.1)
@@ -386,13 +393,14 @@ DEPENDENCIES
   carrierwave_backgrounder
   coffee-rails (~> 4.1.0)
   devise
+  factory_girl_rails (~> 4.0)
   figaro
   fog
   jbuilder (~> 2.0)
   jquery-rails
   less-rails
   lodash-rails
-  pg
+  mysql2
   pry
   pry-rails
   rails (= 4.2.1)
@@ -403,6 +411,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
+  shoulda-matchers (~> 2.8.0)
   sidekiq
   simple_form
   sinatra

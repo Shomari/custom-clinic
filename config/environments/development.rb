@@ -10,7 +10,6 @@ Rails.application.configure do
  :authentication       => "plain",
 :enable_starttls_auto => true
 }
-config.serve_static_files = false
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development

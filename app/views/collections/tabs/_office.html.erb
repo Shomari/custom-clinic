@@ -2,13 +2,13 @@
 	<div class="col-md-3">
 		<div class="row">
 		<%= m.simple_fields_for :offices, @offices do |p| %>
-			<%= p.input :monday, input_html: { "ng-model" => "monday", "ng-init" => "monday='#{p.object.monday}'" } %>
-			<%= p.input :tuesday, input_html: { "ng-model" => "tuesday", "ng-init" => "tuesday='#{p.object.tuesday}'" } %>
-			<%= p.input :wednesday, input_html: { "ng-model" => "wednesday", "ng-init" => "wednesday='#{p.object.wednesday}'" } %>
-			<%= p.input :thursday, input_html: { "ng-model" => "thursday", "ng-init" => "thursday='#{p.object.thursday}'" } %>
-			<%= p.input :friday, input_html: { "ng-model" => "friday", "ng-init" => "friday='#{p.object.friday}'" } %>
-			<%= p.input :saturday, input_html: { "ng-model" => "saturday", "ng-init" => "saturday='#{p.object.saturday}'" } %>
-			<%= p.input :sunday, input_html: { "ng-model" => "sunday", "ng-init" => "sunday='#{p.object.sunday}'" } %>
+			<%= p.input :monday, input_html: { "ng-model" => "monday", "ng-init" => "monday='#{p.object.monday}'", :maxlength => 16 } %>
+			<%= p.input :tuesday, input_html: { "ng-model" => "tuesday", "ng-init" => "tuesday='#{p.object.tuesday}'", :maxlength => 16 } %>
+			<%= p.input :wednesday, input_html: { "ng-model" => "wednesday", "ng-init" => "wednesday='#{p.object.wednesday}'", :maxlength => 16 } %>
+			<%= p.input :thursday, input_html: { "ng-model" => "thursday", "ng-init" => "thursday='#{p.object.thursday}'", :maxlength => 16 } %>
+			<%= p.input :friday, input_html: { "ng-model" => "friday", "ng-init" => "friday='#{p.object.friday}'", :maxlength => 16 } %>
+			<%= p.input :saturday, input_html: { "ng-model" => "saturday", "ng-init" => "saturday='#{p.object.saturday}'", :maxlength => 16 } %>
+			<%= p.input :sunday, input_html: { "ng-model" => "sunday", "ng-init" => "sunday='#{p.object.sunday}'", :maxlength => 16 } %>
 		<% end %>
 		</div>
 	</div>

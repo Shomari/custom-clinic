@@ -1,12 +1,12 @@
 <% doctor_index = 1 %>
 <div class="row docs" data-count="<%= @doctors.to_json %>">
 	<ul class="nav nav-tabs">
-		<li class="active"><a data-toggle="tab" href="#doctor_0">1</a></li>
+		<li class="active"><a data-toggle="tab" href="#doctor_0">Doctor 1</a></li>
 		<% 4.times do %>
-			<li class="hidden" id="doc_tab_<%= doctor_index %>"><a data-toggle="tab" href="#doctor_<%= doctor_index %>"><%= doctor_index + 1 %></a></li>
+			<li class="hidden" id="doc_tab_<%= doctor_index %>"><a data-toggle="tab" href="#doctor_<%= doctor_index %>">Doctor <%= doctor_index + 1 %></a></li>
 			<% doctor_index += 1 %>
 		<% end %>
-		<li><a onclick="addDoctor()" data-toggle="tab" href="#">+</a></li>
+		<li onclick="addDoctor()" ><a data-toggle="tab" href="#">+</a></li>
 	</ul>
 </div>
 
@@ -30,9 +30,9 @@
 			<div class="col-md-3">
 				<div class="row">		
 						<%= d.input :image, as: :file, input_html: {"onchange" => "previewFile(#{d.index})"} %>
-						<%= d.input :name, input_html: { "ng-model" => "name_#{d.index}", "ng-init" => "name_#{d.index}='#{d.object.name}'"  } %>	
-						<%= d.input :speciality, input_html: {"ng-model" => "speciality_#{d.index}", "ng-init" => "speciality_#{d.index}='#{d.object.speciality}'"} %>
-						<%= d.input :bio, :as => :text,  input_html: { "ng-model" => "bio_#{d.index}", "ng-init" => "bio_#{d.index}='#{d.object.bio}'", "rows" => 10} %>
+						<%= d.input :name, input_html: { "ng-model" => "name_#{d.index}", "ng-init" => "name_#{d.index}='#{d.object.name}'", :maxlength => 23  } %>	
+						<%= d.input :speciality, input_html: {"ng-model" => "speciality_#{d.index}", "ng-init" => "speciality_#{d.index}='#{d.object.speciality}'", :maxlength => 20} %>
+						<%= d.input :bio, :as => :text,  input_html: { "ng-model" => "bio_#{d.index}", "ng-init" => "bio_#{d.index}='#{d.object.bio}'", "rows" => 10, :maxlength => 600} %>
 				</div>	
 			</div><!--  col-md-4 -->
 			<%= render partial: "themes/standard/doctor_preview.html.erb", locals: {doctor: d.object, name: "name_#{d.index}", speciality: "speciality_#{d.index}", bio: "bio_#{d.index}", index: "#{d.index}"} %>

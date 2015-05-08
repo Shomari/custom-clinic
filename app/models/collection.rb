@@ -9,21 +9,22 @@ class Collection < ActiveRecord::Base
 	accepts_nested_attributes_for :offices
 
 	def check_for_doctor_updates(params)
-	doctor_updates = []			
-		params[:collection][:doctors_attributes].each_with_index do |doctor, index|
-			doc = doctor[1].to_hash
-			doc["image"] = doc["image"].original_filename unless doc["image"].blank?
-		  doctor_updates << index.to_s unless Doctor.where(doc).present?		  
+		doctor_updates = []		
+		params["collection"]["doctors_attributes"].each_with_index do |doctor, index|
+			doc              = doctor[1].to_hash
+			doc["image"]     = doc["image"].original_filename unless doc["image"].blank?
+		  doctor_updates   << index.to_s unless Doctor.where(doc).present?		  
 		end
+
 		doctor_updates
 	end
 
 	def check_for_image_updates(params)
 		avatars = []
 		params[:collection][:doctors_attributes].each_with_index do |doctor, index|
-			image_params = params[:collection][:doctors_attributes][index.to_s]["image"]
-			doc = doctor[1].to_hash
-			doc["image"] = doc["image"].original_filename unless doc["image"].blank?
+			image_params    = params[:collection][:doctors_attributes][index.to_s]["image"]
+			doc             = doctor[1].to_hash
+			doc["image"]    = doc["image"].original_filename unless doc["image"].blank?
 
 			if image_params != nil
 		  	avatars << image_params.tempfile.path
@@ -34,7 +35,7 @@ class Collection < ActiveRecord::Base
 	end
 
 	def check_for_office_updates(params)
-		office = params[:collection][:offices_attributes]["0"].to_hash		
+		office = params["collection"]["offices_attributes"]["0"].to_hash		
 		office["collection_id"] = self.id
 		if self.id == nil
 			office.values == ["", "", "", "", "", "", "", nil] ? false : true   ### Check for any input when a new office is created

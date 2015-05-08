@@ -62,7 +62,7 @@ class CollectionsController < ApplicationController
 	end
 
 	def update
-
+		binding.pry
 		collection = Collection.find(params[:id])
 
 		doctor_updates   = collection.check_for_doctor_updates(params)

@@ -1,8 +1,14 @@
-  <% if flash[:notice] %>
-    <div class="notice"><%= flash[:notice] %></div>
-  <% end %>
+<div class="clinic-container">
+	<div class="col-md-3 col-md-offset-5" id="clinic-form">
+		
+		<%= form_tag('/verify') %>
+		<%= text_field_tag 'clinic_id', nil, class: "input-sm", placeholder: "Enter Clinic ID" %>
+		<%= submit_tag 'submit', class: "btn btn-primary" %>
+	  <% if flash[:notice] %>
+			<div class="notice"><%= flash[:notice] %></div>
+		<% end %>
+	</div>
+</div> <!-- /container -->
 
 
-<%= form_tag('/verify') %>
-<%= text_field_tag 'clinic_id' %>
-<%= submit_tag %>
+
