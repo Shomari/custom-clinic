@@ -1,6 +1,6 @@
 <% doctor_index = 1 %>
 <div class="row docs" data-count="<%= @doctors.to_json %>">
-	<ul class="nav nav-tabs">
+	<ul class="nav nav-tabs doc-tabs">
 		<li class="active"><a data-toggle="tab" href="#doctor_0">Doctor 1</a></li>
 		<% 4.times do %>
 			<li class="hidden" id="doc_tab_<%= doctor_index %>"><a data-toggle="tab" href="#doctor_<%= doctor_index %>">Doctor <%= doctor_index + 1 %></a></li>

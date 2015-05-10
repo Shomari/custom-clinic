@@ -3,6 +3,7 @@ class ImageWorker
 	require 'RMagick'
 	include Magick
 	include Sidekiq::Worker
+	sidekiq_options :retry => false
 
 	def perform(updates, avatars, office_updates, reminder_updates, params, collection_id)
 
@@ -45,8 +46,11 @@ class ImageWorker
 	### of passing lots of params
 	def make_doctor_images(name, speciality, bio, id, avatar, audio)
 		avatar = Doctor.find(id).image
-		
-		avatar = Image.read(avatar.file.file).last
+		if avatar.file.nil?
+			avatar = Image.read('public/transparent.png').last
+		else
+			avatar = Image.read(avatar.file.file).last
+		end
 
 		background      = ImageList.new('app/assets/images/CMH_template001.jpg')
 		avatar          = avatar.resize_to_fit(700,500)
@@ -91,8 +95,6 @@ class ImageWorker
 
 		random    = SecureRandom.hex
 		type      = "doctor"
-		binding.pry
-		# File.delete(avatar)
 
 		final.write("tmp/images/#{random}.jpg")
 		MovieWorker.perform_async(random, doctor_id, type, audio)

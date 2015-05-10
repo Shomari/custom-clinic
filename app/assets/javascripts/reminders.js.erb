@@ -38,7 +38,14 @@ function showReminders(index){
 
 function addReminder(){
 	var adds = reminder_remains.shift(1)
-	$("#remind_tab_"+adds).removeClass("hidden-reminder");
+	$(".remind-tabs").children('li').removeClass('active')
+	
+	$("#remind_tab_"+adds).removeClass("hidden-reminder").addClass("active");
+
+	
+	// Change view to newest reminder when the plus is clicked	
+	$("#reminder_"+(adds-1)).removeClass("active");
+	$("#reminder_"+adds).addClass("active");
 }
 
 function countDoctors(doctors){
@@ -59,7 +66,16 @@ function showDoctors(index){
 
 function addDoctor(){
 	var adds = remainders.shift(1)
-	$("#doc_tab_"+adds).removeClass("hidden");
+	$(".doc-tabs").children('li').removeClass('active')
+	//content
+	$("#doctor_"+(adds-1)).removeClass("active");
+	$("#doctor_"+adds).addClass("active");
+
+	//tabs jquery causes active to go back to last button
+	$("#doc_tab_"+adds).addClass("active").removeClass("hidden");
+
+
+	// Change view to newest doctor when the plus is clicked
 }
 
 // Changes the audio track when user uses the dropdown

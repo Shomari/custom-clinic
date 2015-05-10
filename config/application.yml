@@ -10,16 +10,16 @@
 #   stripe_api_key: sk_live_EeHnL644i6zo4Iyq4v1KdV9H
 #   stripe_publishable_key: pk_live_9lcthxpSIHbGwmdO941O1XVU
 
-gmail_username: 'xeroshogun@gmail.com'
-gmail_password: 'wingzero06'
+gmail_username: 
+gmail_password: 
 
 sf_username: 'shomari.e@contextmediainc.com.staging'
-sf_password:  'wingzero05'
+sf_password:  
 sf_security_token: 'luzvxCLqrFywA4tcq4GwD8w4'
 sf_client_id: '3MVG9sLbBxQYwWqsMePpk_o4w.BOkzVhkOH3KFVjKtXwK9QAKCbDkiNjnVdYCyXeCl8dSTxvKzBmp2oNFzCnj'
 sf_client_secret: '2025903504565848878'
 
-### Amazon S3 credentials
+### Amazon S3 credentials these have been deleted
 aws_access_key:         'AKIAIC57GWCNJT5CLW6A'
 aws_secret_access_key: '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'
 

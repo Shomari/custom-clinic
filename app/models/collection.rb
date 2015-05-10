@@ -8,6 +8,30 @@ class Collection < ActiveRecord::Base
 	accepts_nested_attributes_for :reminders
 	accepts_nested_attributes_for :offices
 
+	### Get the last 5 doctors for the collection
+	### If there are less than 5, build the remaining doctor
+	### objects for the view to use
+	def build_doctors
+		docs = self.doctors.last(5).to_a
+		(5 - self.doctors.count).times do
+			docs << self.doctors.build
+		end
+		docs
+	end
+
+	### Same as build_doctors, but with reminders
+	def build_reminders
+		reminds = self.reminders.last(10).to_a		
+		(10 - self.reminders.count).times do
+			reminds << self.reminders.build
+		end
+		reminds
+	end
+
+	def build_offices
+		self.offices.last || self.offices.build
+	end
+
 	def check_for_doctor_updates(params)
 		doctor_updates = []		
 		params["collection"]["doctors_attributes"].each_with_index do |doctor, index|

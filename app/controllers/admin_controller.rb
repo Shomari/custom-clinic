@@ -5,6 +5,8 @@ class AdminController < ApplicationController
 	def index
 	end
 
+
+	### checks salesforce to make sure client id enter exists
 	def verify
 		client = get_salesforce_client
 		clinic = client.find('Account', params[:clinic_id], 'CMHID__c' )		

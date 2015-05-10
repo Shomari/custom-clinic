@@ -6,42 +6,28 @@ class CollectionsController < ApplicationController
 
 	TRACKS = ["Track 1", "Track 2"]
 
-	#refactor this, abstract into model class
 	def show
-		@clinic_id = session[:clinic_id].to_i
-		# if no collection, then cna't build last doctor
-		# if collection you need a patch route
+		@clinic_id  = session[:clinic_id].to_i
+
 		@collection = Collection.find_or_initialize_by(clinic_id: session[:clinic_id].to_i)
-		if @collection.id.nil?
-			@collection.offices.build
-		else
-			@doctor = @collection.doctors.last(5)
-			@offices = @collection.offices.last			
-		end
+		@doctors    = @collection.build_doctors
+		@offices    = @collection.build_offices
+		@reminders  = @collection.build_reminders
 
-		@doctors = @collection.doctors.last(5).to_a
-		(5 - @collection.doctors.count).times do
-				@doctors << @collection.doctors.build
-		end
-
-
-		@reminders = @collection.reminders.last(10).to_a		
-		(10 - @collection.reminders.count).times do
-				@reminders << @collection.reminders.build
-		end
-		# @collection = Collection.new
-
-		@tracks = TRACKS
+		@tracks     = TRACKS
 	end
 
 	def create
-		binding.pry
-
 		collection =  empty_collection ### helper ###
+
+		### These methods compare text that is submitted with text stored in the database
+		### If text is different (signaling an update), the index of that object is added
+		### to updates
 
 		doctor_updates   = collection.check_for_doctor_updates(params)
 		office_updates   = collection.check_for_office_updates(params)
 		reminder_updates = collection.check_for_reminder_updates(params)
+
 		avatars = []
 		params[:collection][:doctors_attributes].each_with_index do |doctor, index|
 			image_params = params[:collection][:doctors_attributes][index.to_s]["image"]
@@ -62,7 +48,6 @@ class CollectionsController < ApplicationController
 	end
 
 	def update
-		binding.pry
 		collection = Collection.find(params[:id])
 
 		doctor_updates   = collection.check_for_doctor_updates(params)

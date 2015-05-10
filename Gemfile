@@ -18,7 +18,6 @@ gem 'devise'
 gem 'simple_form'
 
 gem 'carrierwave'
-gem 'carrierwave_backgrounder'
 
 gem 'rmagick'
 gem 'fog'

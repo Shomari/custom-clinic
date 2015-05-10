@@ -3,6 +3,7 @@ class MovieWorker
 	require 'RMagick'
 	include Magick
 	include Sidekiq::Worker
+	sidekiq_options :retry => false
 	
 
 	def perform(random, id, type, audio)
@@ -16,10 +17,22 @@ class MovieWorker
 		File.open(output) do |f|
 			video.movie = f
 		end
-
+		binding.pry
 		clinic_id = save_video(id, type)		
 		VideoMailer.sample_email(video.movie).deliver
-		s3_upload(output, clinic_id)
+
+		### Delete temporary images and video after they are no longer needed
+		###  This should get moved down after S3 upload has finished.
+		File.delete("tmp/images/#{random}.jpg")
+		File.delete(output)
+
+		#get folder containing temporary video storage.
+		folder=File.dirname(video.movie.file.file)
+		FileUtils.rm_r(folder)
+		
+
+
+		# s3_upload(output, clinic_id)
 	end
 
 	def s3_upload(file_path, clinic_id)
@@ -39,7 +52,7 @@ class MovieWorker
 			)
 
 		url = file.url(0)[/.+?(?=\?)/]
-		File.delete(file_path)
+		# File.delete(file_path)
 
 		SalesforceWorker.perform_async(clinic_id, url)
 	end
