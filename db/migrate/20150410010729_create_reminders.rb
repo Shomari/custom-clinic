@@ -4,11 +4,11 @@ class CreateReminders < ActiveRecord::Migration
     	t.integer :position
 			t.string :heading
 			t.text :message
-    	t.belongs_to :collection
-    	
+
+    	t.belongs_to :site    	
       t.timestamps null: false
     end
 
-    add_foreign_key :reminders, :collections
+    add_foreign_key :reminders, :sites
   end
 end

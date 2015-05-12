@@ -9,11 +9,10 @@ class CreateOffices < ActiveRecord::Migration
     	t.string :saturday
     	t.string :sunday
 
-    	t.belongs_to :collection
-
+    	t.belongs_to :site
       t.timestamps null: false
     end
 
-    add_foreign_key :offices, :collections
+    add_foreign_key :offices, :sites
   end
 end

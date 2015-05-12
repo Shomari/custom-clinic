@@ -11,7 +11,7 @@ Rails.application.configure do
 :enable_starttls_auto => true
 }
 
-REDIS_URL = "url_should_go_here"
+REDIS_URL = 'redis://localhost:6379/0/cache'
 config.cache_store = :redis_store, 'redis://localhost:6379/0/cache', { expires_in: 90.minutes }
 
   # In the development environment your application's code is reloaded on

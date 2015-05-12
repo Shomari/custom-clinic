@@ -1,4 +1,5 @@
 class ImageWorker
+	require_relative '../../config/design'
 	require 'rvg/rvg'
 	require 'RMagick'
 	include Magick
@@ -10,8 +11,10 @@ class ImageWorker
 		collection = Collection.find(collection_id)
 		audio = get_audio_track(params["collection"]["audio"])
 
-		### number needs to be a string when looking through params
-		### however, it needs to be an int when getting ids		
+		### number needs to be a string when looking through params  ###
+		### however, it needs to be an int when getting ids		       ###
+		################################################################
+
 		updates.each do |number|
 			name           = params["collection"]["doctors_attributes"][number]["name"]
 			speciality     = params["collection"]["doctors_attributes"][number]["speciality"]
@@ -24,7 +27,8 @@ class ImageWorker
 
 		office_id = collection.offices.last.id
 		make_office_images(params["collection"]["offices_attributes"]["0"], office_id, audio) if office_updates == true
-		# make_reminder_images
+		
+		### make_reminder_images  ###
 		reminder_updates.each do |number|
 			heading       = params["collection"]["reminders_attributes"][number]["heading"]
 			message       = params["collection"]["reminders_attributes"][number]["message"]
@@ -39,7 +43,7 @@ class ImageWorker
 	def get_audio_track(track)
 		case track
 		when "Track 1"
-			"app/assets/images/bensound-funnysong.mp3"
+			"app/assets/audio/audio405188-NORMALIZED.mp3"
 		else
 			"app/assets/audio/bensound-acousticbreeze.mp3"
 		end
@@ -54,19 +58,19 @@ class ImageWorker
 		else
 			avatar = Image.read(avatar.file.file).last
 		end
-
+		binding.pry
 		background      = ImageList.new('app/assets/images/CMH_template001.jpg')
 		avatar          = avatar.resize_to_fit(700,500)
-		name_img        = create_section_image(name, '#D9B2FB', "Helvetica-Bold", 64, "600x100")
-		speciality_img  = create_section_image(speciality, '#FFFFFF', "Helvetica", 46, "600x50")
-		bio_img         = create_section_image(bio, '#FFFFFF', "Helvetica", 32, "600x400")
+		name_img        = create_section_image(name, NAME_IMG_COLOR, NAME_IMG_FONT, NAME_IMG_FONT_SIZE, NAME_IMG_PICTURE_SIZE)
+		speciality_img  = create_section_image(speciality, SPECIALITY_IMG_COLOR, SPECIALITY_IMG_FONT , SPECIALITY_IMG_FONT_SIZE, SPECIALITY_IMG_PICTURE_SIZE )
+		bio_img         = create_section_image(bio, BIO_IMG_COLOR , BIO_IMG_FONT, BIO_IMG_FONT_SIZE, BIO_IMG_PICTURE_SIZE )
 
 		flatten_doctor_image(background, avatar, name_img, speciality_img, bio_img, id, audio)
 	end
 
 	def make_office_images(days_hash, office_id, audio)
 		days_hash.update(days_hash) do |key, value|
-			value = create_section_image(value, "#FFFFFF", 'Helvetica-Bold', 60, "500x200")
+			value = create_section_image(value, OFFICE_IMAGE_COLOR, OFFICE_IMG_FONT, OFFICE_IMG_FONT_SIZE, OFFICE_IMG_PICTURE_SIZE)
 		end
 		background = ImageList.new('app/assets/images/hours_template001.jpg')
 		flatten_office_image(background, days_hash, office_id, audio)
@@ -74,8 +78,8 @@ class ImageWorker
 
 	def make_reminder_images(heading, message, reminder_id, audio)
 		background  = ImageList.new('app/assets/images/reminder_001.jpg')
-		heading_img = create_section_image(heading, '#D9B2FB', "Helvetica-Bold", 64, "1200x100", CenterGravity)
-		message_img = create_section_image(message, '#FFFFFF', 'Helvetica-Bold', 50, "1200x400", CenterGravity)
+		heading_img = create_section_image(heading, HEADING_IMG_COLOR, HEADING_IMG_FONT, HEADING_IMG_FONT_SIZE, HEADING_IMG_PICTURE_SIZE, CenterGravity)
+		message_img = create_section_image(message, MESSAGE_IMG_COLOR, MESSAGE_IMG_FONT, MESSAGE_IMG_FONT_SIZE, MESSAGE_IMG_PICTURE_SIZE, CenterGravity)
 		flatten_reminder_image(background, heading_img, message_img, reminder_id, audio)
 	end	
 
@@ -91,10 +95,10 @@ class ImageWorker
 	end
 
 	def flatten_doctor_image(background, avatar, name_img, speciality_img, bio_img, doctor_id, audio)
-		final     = background.composite(avatar, 100, 175, AtopCompositeOp)
-		final     = final.composite(name_img, 550, 175, AtopCompositeOp)
-		final     = final.composite(speciality_img, 550, 250, AtopCompositeOp )
-		final     = final.composite(bio_img, 550, 315, AtopCompositeOp )
+		final     = background.composite(avatar, AVATAR_X , AVATAR_Y, AtopCompositeOp)
+		final     = final.composite(name_img, NAME_IMG_X, NAME_IMG_Y, AtopCompositeOp)
+		final     = final.composite(speciality_img, SPECIALITY_IMG_X, SPECIALITY_IMG_Y, AtopCompositeOp )
+		final     = final.composite(bio_img, BIO_IMG_X, BIO_IMG_Y, AtopCompositeOp )
 
 		random    = SecureRandom.hex
 		type      = "doctor"
@@ -104,13 +108,13 @@ class ImageWorker
 	end
 
 	def flatten_office_image(background, days_img_hash, office_id, audio)
-		final = background.composite(days_img_hash["monday"], 850, 143, AtopCompositeOp )
-		final = final.composite(days_img_hash["tuesday"], 850, 223, AtopCompositeOp)
-		final = final.composite(days_img_hash["wednesday"], 850, 308, AtopCompositeOp)
-		final = final.composite(days_img_hash["thursday"], 850, 494, AtopCompositeOp)
-		final = final.composite(days_img_hash["friday"], 850, 477, AtopCompositeOp)
-		final = final.composite(days_img_hash["saturday"], 850, 561, AtopCompositeOp)
-		final = final.composite(days_img_hash["sunday"], 850, 646, AtopCompositeOp)
+		final = background.composite(days_img_hash["monday"], X_AXIS, MONDAY_Y, AtopCompositeOp )
+		final = final.composite(days_img_hash["tuesday"], X_AXIS, TUESDAY_Y, AtopCompositeOp)
+		final = final.composite(days_img_hash["wednesday"], X_AXIS, WEDNEDAY_Y, AtopCompositeOp)
+		final = final.composite(days_img_hash["thursday"], X_AXIS, THRUSDAY_Y, AtopCompositeOp)
+		final = final.composite(days_img_hash["friday"], X_AXIS, FRIDAY_Y, AtopCompositeOp)
+		final = final.composite(days_img_hash["saturday"], X_AXIS, STAURDAY_Y, AtopCompositeOp)
+		final = final.composite(days_img_hash["sunday"], X_AXIS, SUNDAY_Y, AtopCompositeOp)
 
 		random = SecureRandom.hex
 		type = "office"
@@ -119,8 +123,8 @@ class ImageWorker
 	end
 
 	def flatten_reminder_image(background, heading_img, message_img, reminder_id, audio)
-		final = background.composite(heading_img, 75, 275, AtopCompositeOp)
-		final = final.composite(message_img, 75, 275, AtopCompositeOp)
+		final = background.composite(heading_img, HEADING_IMG_X, HEADING_IMG_Y, AtopCompositeOp)
+		final = final.composite(message_img, MESSAGE_IMG_X, MESSAGE_IMG_Y, AtopCompositeOp)
 		random = SecureRandom.hex
 		type = "reminder"
 		final.write("tmp/images/#{random}.jpg"){self.quality = 100}

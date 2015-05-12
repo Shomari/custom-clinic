@@ -8,16 +8,16 @@
 	</div> <!-- row -->
 	<div class="tab-content">
 		<div class="tab-pane active" id="doctor">
-		<%= simple_form_for @collection, html: {multipart: true, id: "form"} do |m| %>
+		<%= simple_form_for @site, html: {multipart: true, id: "form"} do |m| %>
 		<%= m.input :clinic_id, as: :hidden, input_html: { value:  @clinic_id} %>
 		
-			<%= render partial: "collections/tabs/doctor", locals: { :m => m } %>
+			<%= render partial: "sites/tabs/doctor", locals: { :m => m } %>
 		</div>
 		<div class="tab-pane" id="office">
-			<%= render partial: "collections/tabs/office", locals: { :m => m } %>
+			<%= render partial: "sites/tabs/office", locals: { :m => m } %>
 		</div>
 		<div class="tab-pane" id="reminders">
-			<%= render partial: "collections/tabs/reminders", locals: { :m => m } %>
+			<%= render partial: "sites/tabs/reminders", locals: { :m => m } %>
 		</div>
 			<%= m.button :submit, "Submit", :id => "submit" %>
 			<% end %>
