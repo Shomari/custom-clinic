@@ -1,11 +1,10 @@
 class CreateReminders < ActiveRecord::Migration
   def change
     create_table :reminders do |t|
-    	t.integer :position
 			t.string :heading
-			t.text :message
+			t.text   :message
 
-    	t.belongs_to :site    	
+    	t.belongs_to :site, null: false    	
       t.timestamps null: false
     end
 

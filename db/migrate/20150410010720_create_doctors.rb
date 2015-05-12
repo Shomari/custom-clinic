@@ -6,7 +6,7 @@ class CreateDoctors < ActiveRecord::Migration
     	t.text :bio
     	t.string :image
 
-    	t.belongs_to :site
+    	t.belongs_to :site, null: false
       t.timestamps null: false
     end
     add_foreign_key :doctors, :sites

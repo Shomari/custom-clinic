@@ -11,49 +11,54 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150410010822) do
+ActiveRecord::Schema.define(version: 20150410010807) do
 
-  create_table "collections", force: :cascade do |t|
+  create_table "doctors", force: :cascade do |t|
     t.string   "name",       limit: 255
+    t.string   "speciality", limit: 255
+    t.text     "bio",        limit: 65535
+    t.string   "image",      limit: 255
+    t.integer  "site_id",    limit: 4,     null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "doctors", ["site_id"], name: "fk_rails_5c443c7a0b", using: :btree
+
+  create_table "offices", force: :cascade do |t|
+    t.string   "monday",     limit: 255
+    t.string   "tuesday",    limit: 255
+    t.string   "wednesday",  limit: 255
+    t.string   "thursday",   limit: 255
+    t.string   "friday",     limit: 255
+    t.string   "saturday",   limit: 255
+    t.string   "sunday",     limit: 255
+    t.integer  "site_id",    limit: 4,   null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "offices", ["site_id"], name: "fk_rails_d5511b1eb5", using: :btree
+
+  create_table "reminders", force: :cascade do |t|
+    t.string   "heading",    limit: 255
+    t.text     "message",    limit: 65535
+    t.integer  "site_id",    limit: 4,     null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "reminders", ["site_id"], name: "fk_rails_b714b0dfce", using: :btree
+
+  create_table "sites", force: :cascade do |t|
     t.string   "audio",      limit: 255
-    t.string   "clinic_id",  limit: 255
+    t.string   "clinic_id",  limit: 255, null: false
     t.integer  "user_id",    limit: 4
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
 
-  create_table "doctors", force: :cascade do |t|
-    t.string   "name",          limit: 255
-    t.string   "speciality",    limit: 255
-    t.text     "bio",           limit: 65535
-    t.string   "image",         limit: 255
-    t.integer  "collection_id", limit: 4
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-  end
-
-  create_table "offices", force: :cascade do |t|
-    t.string   "name",          limit: 255
-    t.string   "monday",        limit: 255
-    t.string   "tuesday",       limit: 255
-    t.string   "wednesday",     limit: 255
-    t.string   "thursday",      limit: 255
-    t.string   "friday",        limit: 255
-    t.string   "saturday",      limit: 255
-    t.string   "sunday",        limit: 255
-    t.integer  "collection_id", limit: 4
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-  end
-
-  create_table "reminders", force: :cascade do |t|
-    t.integer  "position",      limit: 4
-    t.string   "heading",       limit: 255
-    t.text     "message",       limit: 65535
-    t.integer  "collection_id", limit: 4
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-  end
+  add_index "sites", ["clinic_id"], name: "index_sites_on_clinic_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "role",                   limit: 255
@@ -85,4 +90,7 @@ ActiveRecord::Schema.define(version: 20150410010822) do
 
   add_index "videos", ["recordable_type", "recordable_id"], name: "index_videos_on_recordable_type_and_recordable_id", using: :btree
 
+  add_foreign_key "doctors", "sites"
+  add_foreign_key "offices", "sites"
+  add_foreign_key "reminders", "sites"
 end

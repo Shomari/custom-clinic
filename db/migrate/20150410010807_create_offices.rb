@@ -9,7 +9,7 @@ class CreateOffices < ActiveRecord::Migration
     	t.string :saturday
     	t.string :sunday
 
-    	t.belongs_to :site
+    	t.belongs_to :site, null: false
       t.timestamps null: false
     end
 
