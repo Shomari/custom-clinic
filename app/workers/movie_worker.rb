@@ -17,8 +17,9 @@ class MovieWorker
 		File.open(output) do |f|
 			video.movie = f
 		end
-		binding.pry
-		clinic_id = save_video(id, type)		
+		bindig.pry
+		clinic_id = save_video(id, type)	
+		raise "hello lee's right"	
 		VideoMailer.sample_email(video.movie).deliver
 
 		### Delete temporary images and video after they are no longer needed

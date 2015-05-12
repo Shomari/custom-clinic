@@ -1,7 +1,6 @@
 class CreateOffices < ActiveRecord::Migration
   def change
     create_table :offices do |t|
-    	t.string :name
     	t.string :monday
     	t.string :tuesday
     	t.string :wednesday
@@ -14,5 +13,7 @@ class CreateOffices < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+
+    add_foreign_key :offices, :collections
   end
 end

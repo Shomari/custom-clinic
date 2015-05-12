@@ -9,5 +9,6 @@ class CreateDoctors < ActiveRecord::Migration
     	t.belongs_to :collection
       t.timestamps null: false
     end
+    add_foreign_key :doctors, :collections
   end
 end

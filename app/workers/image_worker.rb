@@ -8,7 +8,10 @@ class ImageWorker
 	def perform(updates, avatars, office_updates, reminder_updates, params, collection_id)
 
 		collection = Collection.find(collection_id)
-		audio = get_audio_track(params["collection"]["audio"])		
+		audio = get_audio_track(params["collection"]["audio"])
+
+		### number needs to be a string when looking through params
+		### however, it needs to be an int when getting ids		
 		updates.each do |number|
 			name           = params["collection"]["doctors_attributes"][number]["name"]
 			speciality     = params["collection"]["doctors_attributes"][number]["speciality"]
@@ -21,7 +24,7 @@ class ImageWorker
 
 		office_id = collection.offices.last.id
 		make_office_images(params["collection"]["offices_attributes"]["0"], office_id, audio) if office_updates == true
-			# make_reminder_images
+		# make_reminder_images
 		reminder_updates.each do |number|
 			heading       = params["collection"]["reminders_attributes"][number]["heading"]
 			message       = params["collection"]["reminders_attributes"][number]["message"]
