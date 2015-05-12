@@ -6,7 +6,7 @@ class MovieWorker
 	sidekiq_options :retry => false
 	
 
-	def perform(random, id, type, audio)
+	def perform(random, model_id, type, audio)
 		
 		video = Video.new
 		output = "app/assets/video_temp/#{random}.mp4"
@@ -18,7 +18,7 @@ class MovieWorker
 			video.movie = f
 		end
 		bindig.pry
-		clinic_id = save_video(id, type)	
+		clinic_id = save_video(model_id, type)	
 		raise "hello lee's right"	
 		VideoMailer.sample_email(video.movie).deliver
 
@@ -33,10 +33,10 @@ class MovieWorker
 		
 
 
-		# s3_upload(output, clinic_id)
+		# s3_upload(output, type, model_id, clinic_id)
 	end
 
-	def s3_upload(file_path, clinic_id)
+	def s3_upload(file_path, type, model_id, clinic_id)
 		connection = Fog::Storage.new({
 			:provider               => 'AWS',
 			:aws_access_key_id      =>  ENV["aws_access_key"],
@@ -47,7 +47,7 @@ class MovieWorker
 		bucket = connection.directories.get('customclinic')
 
 		file = bucket.files.create(
-			:key      => "#{file_path}",
+			:key      => "clinic_#{clinic_id}/#{type}_#{model_id}",
 			:body     => File.open(file_path),
 			:public   => true
 			)
