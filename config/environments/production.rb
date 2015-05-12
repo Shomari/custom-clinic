@@ -4,6 +4,8 @@ Rails.application.configure do
   REDIS_URL = "redis://52.25.33.101"
   config.cache_store = :redis_store, "#{REDIS_URL}/0/cache", { expires_in: 90.minutes }
 
+  SECRET_KEY_BASE = '5fdb7a95a98fabe5ec0c72e9a28dd3ca63015b2ee347a931784237df86a52210ec7264949984e32d300160935555e9b23bdabb41b93dc040727c46f8d1feb3c6'
+
 
   # Code is not reloaded between requests.
   config.cache_classes = true
