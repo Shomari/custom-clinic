@@ -9,23 +9,23 @@ class SitesController < ApplicationController
 	def show
 		@clinic_id  = session[:clinic_id].to_i
 
-		@sites      = Site.find_or_initialize_by(clinic_id: session[:clinic_id].to_i)
-		@doctors    = @sites.build_doctors
-		@offices    = @sites.build_offices
-		@reminders  = @sites.build_reminders
+		@site       = Site.find_or_initialize_by(clinic_id: session[:clinic_id].to_i)
+		@doctors    = @site.build_doctors
+		@offices    = @site.build_offices
+		@reminders  = @site.build_reminders
 
 		@tracks     = TRACKS
 	end
 
 	def create
 		site =  empty_collection ### helper ###
-
+		
 		### These methods compare text that is submitted with text stored in the database
 		### If text is different (signaling an update), the index of that object is added
 		### to updates
 
 		doctor_updates   = site.check_for_doctor_updates(params)
-		office_updates   = site.check_for_office_updates(params)
+		office_updates   = site.office_hours_updates?(params)
 		reminder_updates = site.check_for_reminder_updates(params)
 
 		avatars = []
@@ -42,16 +42,18 @@ class SitesController < ApplicationController
 		site = Site.create(site_params)
 		site_id = site.id
 
-		ImageWorker.perform_async(doctor_updates, avatars, office_updates, reminder_updates, params, site_id)
+		DoctorWorker.perform_async(doctor_updates, avatars, params, site_id, current_user)
+		OfficeWorker.perform_async(office_updates, params, site_id, current_user)
+		ReminderWorker.perform_async(reminder_updates, params, site_id, current_user)
 		
-		render :nothing => true
+		render 'submit'
 	end
 
 	def update
 		site = Site.find(params[:id])
 
 		doctor_updates   = site.check_for_doctor_updates(params)
-		office_updates   = site.check_for_office_updates(params)
+		office_updates   = site.office_hours_updates?(params)
 		reminder_updates = site.check_for_reminder_updates(params)
 		avatars = []
 		params[:site][:doctors_attributes].each_with_index do |doctor, index|
@@ -65,11 +67,14 @@ class SitesController < ApplicationController
 		  end
 		end
 
+
 		site.update_attributes(site_params)
 		site_id = site.id
-		ImageWorker.perform_async(doctor_updates, avatars, office_updates, reminder_updates, params, site_id)
+		DoctorWorker.perform_async(doctor_updates, avatars, params, site_id, current_user.email)
+		OfficeWorker.perform_async(office_updates, params, site_id, current_user.email)
+		ReminderWorker.perform_async(reminder_updates, params, site_id, current_user.email)
 		
-		render :nothing => true
+		render 'submit'
 	end
 
 	private

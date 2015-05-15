@@ -1,5 +1,5 @@
 class Office < ActiveRecord::Base
-	belongs_to :collection
+	belongs_to :site
 	
 	has_many :videos, :as => :recordable
 end

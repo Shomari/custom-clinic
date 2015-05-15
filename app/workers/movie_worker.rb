@@ -6,7 +6,7 @@ class MovieWorker
 	sidekiq_options :retry => false
 	
 
-	def perform(random, model_id, type, audio)
+	def perform(random, model_id, type, audio, user)
 		
 		video = Video.new
 		output = "app/assets/video_temp/#{random}.mp4"
@@ -17,10 +17,9 @@ class MovieWorker
 		File.open(output) do |f|
 			video.movie = f
 		end
-		bindig.pry
 		clinic_id = save_video(model_id, type)	
 		raise "hello lee's right"	
-		VideoMailer.sample_email(video.movie).deliver
+		VideoMailer.sample_email(video.movie, user).deliver
 
 		### Delete temporary images and video after they are no longer needed
 		###  This should get moved down after S3 upload has finished.
@@ -44,7 +43,7 @@ class MovieWorker
 			:region                 =>  'us-west-2'
 			})
 
-		bucket = connection.directories.get('customclinic')
+		bucket = connection.directories.get('cmh-customclinic')
 
 		file = bucket.files.create(
 			:key      => "clinic_#{clinic_id}/#{type}_#{model_id}",

@@ -1,3 +1,9 @@
+#########################################
+# 																			#
+#  Deprecated- kept here for reference	#
+# 																			#
+#########################################
+
 class ImageWorker
 	require_relative '../../config/design'
 	require 'rvg/rvg'
@@ -43,9 +49,9 @@ class ImageWorker
 	def get_audio_track(track)
 		case track
 		when "Track 1"
-			"app/assets/audio/audio405188-NORMALIZED.mp3"
+			"app/assets/audio/bensound-acousticbreeze.mp3"			
 		else
-			"app/assets/audio/bensound-acousticbreeze.mp3"
+			"app/assets/audio/audio405188-NORMALIZED.mp3"
 		end
 	end
 

@@ -1,28 +1,35 @@
 $(document).ready(function(){
-	$(".doctor-tab").first().addClass("active");
-	$(".first").first().addClass("active");
+	if ( $( "#first-tab" ).length ) {
+		tabFunction();
+	}
 
-	// These variables and functions add the click functionality for additional 
-	// doctors and reminders
-	window.reminders          = $(".reminds").data('count')
-	window.max_remind         = [1,2,3,4,5,6,7,8,9]
-	window.remind_index       = countReminders(reminders)
-	window.reminder_remains   = _.difference(max_remind, remind_index)
-
-	window.doctors           = $(".docs").data('count')	|| 0	
-	window.max               = [1,2,3,4]
-	window.ind               = countDoctors(doctors)
-	window.remainders        = _.difference(max, ind)
-
-
-	showDoctors(ind)
-	showReminders(remind_index)
 });
+
+	function tabFunction(){
+		$(".doctor-tab").first().addClass("active");
+		$(".reminder-tab").first().addClass("active");
+
+		// These variables and functions add the click functionality for additional 
+		// doctors and reminders
+		window.reminders          = $(".reminds").data('count')
+		window.max_remind         = [1,2,3,4,5,6,7,8,9]
+		window.remind_index       = countReminders(reminders)
+		window.reminder_remains   = _.difference(max_remind, remind_index)
+
+		window.doctors           = $(".docs").data('count')	|| 0	
+		window.max               = [1,2,3,4]
+		window.ind               = countDoctors(doctors)
+		window.remainders        = _.difference(max, ind)
+
+
+		showDoctors(ind)
+		showReminders(remind_index)
+	}
 
 function countReminders(reminders){
 	var index = []
  	for (var i=0; i < reminders.length; i++){
- 		if (!_.isEmpty(reminders[i].heading) && !_.isEmpty(reminders[i].message)){
+ 		if (!_.isEmpty(reminders[i].heading) || !_.isEmpty(reminders[i].message)){
  			index.push(i);  					
  		}
  	}  	
@@ -44,14 +51,14 @@ function addReminder(){
 
 	
 	// Change view to newest reminder when the plus is clicked	
-	$("#reminder_"+(adds-1)).removeClass("active");
+	$(".reminder_tab").removeClass("active");
 	$("#reminder_"+adds).addClass("active");
 }
 
 function countDoctors(doctors){
 	var index = []
  	for (var i=0; i < doctors.length; i++){
- 		if (!_.isEmpty(doctors[i].name) && !_.isEmpty(doctors[i].speciality) && !_.isEmpty(doctors[i].bio)){
+ 		if (!_.isEmpty(doctors[i].name) || !_.isEmpty(doctors[i].speciality) || !_.isEmpty(doctors[i].bio)){
  			index.push(i);  					
  		}
  	}  	
@@ -68,11 +75,11 @@ function addDoctor(){
 	var adds = remainders.shift(1)
 	$(".doc-tabs").children('li').removeClass('active')
 	//content
-	$("#doctor_"+(adds-1)).removeClass("active");
+	$(".doctor-tab").removeClass("active");
 	$("#doctor_"+adds).addClass("active");
 
 	//tabs jquery causes active to go back to last button
-	$("#doc_tab_"+adds).addClass("active").removeClass("hidden");
+	$("#doc_tab_"+adds).removeClass("hidden").addClass("active");
 
 
 	// Change view to newest doctor when the plus is clicked
@@ -80,7 +87,7 @@ function addDoctor(){
 
 // Changes the audio track when user uses the dropdown
 function changeTrack(){
-	var selected = $("#collection_audio option:selected").text();
+	var selected = $("#site_audio option:selected").text();
 	var track1 = "<%= asset_path('bensound-acousticbreeze.mp3') %>";	
 	var track2 = "<%= asset_path('audio405188-NORMALIZED.mp3') %>";
 	if(selected == "Track 1"){

@@ -11,7 +11,7 @@ class AdminController < ApplicationController
 		client = get_salesforce_client
 		clinic = client.find('Account', params[:clinic_id], 'CMHID__c' )		
 		session[:clinic_id] = clinic.CMHID__c
-		redirect_to show_collection_path
+		redirect_to show_site_path
 	end
 
 	private

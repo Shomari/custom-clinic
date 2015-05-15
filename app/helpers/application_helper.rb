@@ -33,6 +33,6 @@ module ApplicationHelper
 		     "8"=>{"heading"=>"", "message"=>""},
 		     "9"=>{"heading"=>"", "message"=>""}}}
 
-		 Collection.new(empty_hash)
+		 Site.new(empty_hash)
 	end
 end

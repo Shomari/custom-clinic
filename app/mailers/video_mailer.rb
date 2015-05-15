@@ -1,7 +1,7 @@
-class VideoMailer < ApplicationMailer
+class VideoMailer < ActionMailer::Base
 
-	def sample_email(file)
-		attachments["test.mp4"] = file.read
-		mail(to: 'xeroshogun@gmail.com', subject: 'Your video clip')
+	def sample_email(file, user)
+		attachments["video.mp4"] = file.read
+		mail(to: user, subject: 'Your customized clinic video')
 	end
 end

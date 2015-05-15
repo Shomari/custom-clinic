@@ -47,6 +47,7 @@ group :development, :test do
 	gem 'rspec-rails'
   gem 'byebug'
   gem "factory_girl_rails", "~> 4.0"
+  gem 'database_cleaner', '~> 1.4.1'
 
   gem 'web-console', '~> 2.0'
 

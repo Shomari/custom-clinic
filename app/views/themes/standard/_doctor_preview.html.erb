@@ -1,10 +1,10 @@
 	<div class="col-md-7 preview-standard">
 		<div class="row">
 			<div class="col-md-5 col-md-offset-1" id="doctor-image">
-					<% if doctor != nil %>
+					<% if doctor.image.present? %>
 						<%= image_tag doctor.image, id: "image_#{index}" %>
 					<% else %>
-						<img style="display:none;" src="" alt="Image preview...">
+						<img style="display:none;" src="" alt="Image preview..." id="image_<%= index %>">
 					<% end %>
 			</div>
 			<div class="col-md-5" id="doctor-box">

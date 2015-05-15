@@ -1,9 +1,9 @@
 <% reminder_index = 1 %>
 <div class="row reminds" data-count="<%= @reminders.to_json %>">
 	<ul class="nav nav-tabs remind-tabs">
-		<li class="active"><a data-toggle="tab" href="#0">1</a></li>
+		<li class="active"><a data-toggle="tab" href="#reminder_0">1</a></li>
 		<% 9.times do %>
-			<li class="hidden-reminder" id="remind_tab_<%= reminder_index %>"><a data-toggle="tab" href="#<%= reminder_index %>"><%= reminder_index + 1 %></a></li>
+			<li class="hidden-reminder" id="remind_tab_<%= reminder_index %>"><a data-toggle="tab" href="#reminder_<%= reminder_index %>"><%= reminder_index + 1 %></a></li>
 			<% reminder_index += 1 %>
 		<% end %>
 		<li onclick="addReminder()" ><a data-toggle="tab" href="#">+</a></li>
@@ -12,7 +12,7 @@
 
 <div class="tab-content">	
 <%= m.simple_fields_for :reminders, @reminders do |p| %>
-			<div class="tab-pane first" id="reminder_<%= p.index %>">
+			<div class="tab-pane reminder-tab" id="reminder_<%= p.index %>">
 				<div class="row">
 					<div class="col-md-3">
 					<%= p.input :heading, input_html: {"ng-model" => "heading_#{p.index}", "ng-init" => "heading_#{p.index}='#{p.object.heading}'", maxlength: 35 } %>

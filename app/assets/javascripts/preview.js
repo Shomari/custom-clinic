@@ -1,6 +1,6 @@
 function previewFile(index) {
   var preview = document.querySelector('#image_'+ index);
-  var file    = document.querySelector('#collection_doctors_attributes_'+index+'_image').files[0];
+  var file    = document.querySelector('#site_doctors_attributes_'+index+'_image').files[0];
   var reader  = new FileReader();
 
   reader.onloadend = function () {

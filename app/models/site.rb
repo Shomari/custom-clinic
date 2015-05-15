@@ -1,4 +1,4 @@
-class Sites < ActiveRecord::Base
+class Site < ActiveRecord::Base
 	belongs_to :user
 	has_many :doctors
 	has_many :reminders
@@ -34,7 +34,7 @@ class Sites < ActiveRecord::Base
 
 	def check_for_doctor_updates(params)
 		doctor_updates = []		
-		params["collection"]["doctors_attributes"].each_with_index do |doctor, index|
+		params["site"]["doctors_attributes"].each_with_index do |doctor, index|
 			doc              = doctor[1].to_hash
 			doc["image"]     = doc["image"].original_filename unless doc["image"].blank?
 		  doctor_updates   << index.to_s unless Doctor.where(doc).present?		  
@@ -45,8 +45,8 @@ class Sites < ActiveRecord::Base
 
 	def check_for_image_updates(params)
 		avatars = []
-		params[:collection][:doctors_attributes].each_with_index do |doctor, index|
-			image_params    = params[:collection][:doctors_attributes][index.to_s]["image"]
+		params[:site][:doctors_attributes].each_with_index do |doctor, index|
+			image_params    = params[:site][:doctors_attributes][index.to_s]["image"]
 			doc             = doctor[1].to_hash
 			doc["image"]    = doc["image"].original_filename unless doc["image"].blank?
 
@@ -58,9 +58,9 @@ class Sites < ActiveRecord::Base
 		end
 	end
 
-	def check_for_office_updates(params)
-		office = params["collection"]["offices_attributes"]["0"].to_hash		
-		office["collection_id"] = self.id
+	def office_hours_updates?(params)
+		office = params["site"]["offices_attributes"]["0"].to_hash		
+		office["id"] = self.id 								                                ### Make sure the office variable has an id so it can be compared
 		if self.id == nil
 			office.values == ["", "", "", "", "", "", "", nil] ? false : true   ### Check for any input when a new office is created
 		else
@@ -74,9 +74,9 @@ class Sites < ActiveRecord::Base
 	### If they are different, then we know that the user updated them and didn't just leave them the same
 	def check_for_reminder_updates(params)
 		reminder_updates = []
-		params[:collection][:reminders_attributes].each_with_index do |reminder, index|
+		params["site"]["reminders_attributes"].each_with_index do |reminder, index|
 			remind = reminder[1].to_hash
-			remind[:collection_id] = self.id
+			remind["site_id"] = self.id
 			if self.id == nil
 				reminder_updates << index.to_s unless remind["message"].blank? && remind["heading"].blank?  ### When creating a new collection
 			else

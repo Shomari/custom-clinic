@@ -1,16 +1,12 @@
 module Helpers
 
 	def params
-		{"collection"=>
+		{"site"=>
 	  {"clinic_id"=>"69",
 	   "audio"=>"Track 1",
 	   "doctors_attributes"=>
 	    {"0"=>
-	      {
-	       "name"=>"workig",
-	       "speciality"=>"yes",
-	       "bio"=>"This is for spec",
-	       "id"=>"1"},
+	      {"name"=>"workig", "speciality"=>"yes", "bio"=>"This is for spec", "id"=>"1"},
 	     "1"=>{"name"=>"doc", "speciality"=>"winq", "bio"=>"hi", "id"=>"2"},
 	     "2"=>{"name"=>"", "speciality"=>"", "bio"=>"", "id"=>"3"},
 	     "3"=>{"name"=>"", "speciality"=>"", "bio"=>"", "id"=>"4"},
@@ -26,16 +22,16 @@ module Helpers
 	       "sunday"=>"",
 	       "id"=>"5"}},
 	   "reminders_attributes"=>
-	    {"0"=>{"heading"=>"RSPEC", "message"=>"TEST PARAMS", "id"=>"41"},
-	     "1"=>{"heading"=>"Rspec 2", "message"=>"spec 2", "id"=>"42"},
-	     "2"=>{"heading"=>"", "message"=>"", "id"=>"43"},
-	     "3"=>{"heading"=>"", "message"=>"", "id"=>"44"},
-	     "4"=>{"heading"=>"", "message"=>"", "id"=>"45"},
-	     "5"=>{"heading"=>"", "message"=>"", "id"=>"46"},
-	     "6"=>{"heading"=>"", "message"=>"", "id"=>"47"},
-	     "7"=>{"heading"=>"", "message"=>"", "id"=>"48"},
-	     "8"=>{"heading"=>"", "message"=>"", "id"=>"49"},
-	     "9"=>{"heading"=>"", "message"=>"", "id"=>"50"}}},
+	    {"0"=>{"heading"=>"RSPEC", "message"=>"TEST PARAMS", "id"=>"1"},
+	     "1"=>{"heading"=>"Rspec 2", "message"=>"spec 2", "id"=>"2"},
+	     "2"=>{"heading"=>"", "message"=>"", "id"=>"3"},
+	     "3"=>{"heading"=>"", "message"=>"", "id"=>"4"},
+	     "4"=>{"heading"=>"", "message"=>"", "id"=>"5"},
+	     "5"=>{"heading"=>"", "message"=>"", "id"=>"6"},
+	     "6"=>{"heading"=>"", "message"=>"", "id"=>"7"},
+	     "7"=>{"heading"=>"", "message"=>"", "id"=>"8"},
+	     "8"=>{"heading"=>"", "message"=>"", "id"=>"9"},
+	     "9"=>{"heading"=>"", "message"=>"", "id"=>"10"}}},
 	 "commit"=>"Submit",
 	 "controller"=>"collections",
 	 "action"=>"update",
@@ -43,7 +39,7 @@ module Helpers
 	end
 
 	def blank_params
-		{"collection"=>
+		{"site"=>
 		{"audio"=>"Track 1",
 		   "doctors_attributes"=>
 		    {"0"=>{"name"=>"", "speciality"=>"", "bio"=>""},
