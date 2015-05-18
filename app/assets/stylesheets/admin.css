@@ -1,0 +1,17 @@
+#load_icon{
+	position: relative;
+	bottom: 18px;
+	left: 120px;
+	display: none;
+}
+
+#clinic-form{
+	background-color: white;
+	border-style: solid;
+	border-radius: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 80px;
+	width: 375px;
+}
+

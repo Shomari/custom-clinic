@@ -1,4 +1,4 @@
-class VideoMailer < ActionMailer::Base
+class VideoMailer < ApplicationMailer
 
 	def sample_email(file, user)
 		attachments["video.mp4"] = file.read

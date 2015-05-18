@@ -11,7 +11,7 @@ NAME_IMG_FONT                 = "Helvetica-Bold"
 NAME_IMG_FONT_SIZE            = 64
 NAME_IMG_PICTURE_SIZE         = "600x100"
 
-SPECIALITY_IMG_COLOR          = '#FFFFF'
+SPECIALITY_IMG_COLOR          = '#FFFFFF'
 SPECIALITY_IMG_FONT           = 'Helvetica'
 SPECIALITY_IMG_FONT_SIZE      = 46
 SPECIALITY_IMG_PICTURE_SIZE   = "600x100"

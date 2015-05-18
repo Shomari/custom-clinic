@@ -18,8 +18,7 @@ class MovieWorker
 			video.movie = f
 		end
 		clinic_id = save_video(model_id, type)	
-		raise "hello lee's right"	
-		VideoMailer.sample_email(video.movie, user).deliver
+		VideoMailer.sample_email(video.movie, user).deliver!
 
 		### Delete temporary images and video after they are no longer needed
 		###  This should get moved down after S3 upload has finished.
@@ -63,15 +62,15 @@ class MovieWorker
 		when "doctor"
 			doctor = Doctor.find(id)
 			Video.create(recordable: doctor)
-			doctor.collection.clinic_id
+			doctor.site.clinic_id
 		when "office"
 			office = Office.find(id)
 			Video.create(recordable: office)
-			office.collection.clinic_id
+			office.site.clinic_id
 		when "reminder"
 			reminder = Reminder.find(id)
 			Video.create(recordable: reminder)
-			reminder.collection.clinic_id
+			reminder.site.clinic_id
 		end
 	end	
 end

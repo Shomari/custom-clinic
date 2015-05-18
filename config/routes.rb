@@ -1,10 +1,10 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => "registrations" }
 
-  get '/site', to: 'sites#show', as: 'show_site'
-  post '/verify', to: 'admin#verify'
+  get '/site',      to: 'sites#show', as: 'show_site'
+  post '/verify',   to: 'admin#verify'
 
   root 'admin#index'
 

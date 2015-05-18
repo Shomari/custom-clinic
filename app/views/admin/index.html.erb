@@ -1,14 +1,27 @@
 <div class="clinic-container">
-	<div class="col-md-3 col-md-offset-5" id="clinic-form">
-		
-		<%= form_tag('/verify') %>
-		<%= text_field_tag 'clinic_id', nil, class: "input-sm", placeholder: "Enter Clinic ID" %>
-		<%= submit_tag 'submit', class: "btn btn-primary" %>
-	  <% if flash[:notice] %>
-			<div class="notice"><%= flash[:notice] %></div>
-		<% end %>
+	<div class="row">
+		<div class="col-xs-4 col-xs-offset-4" id="clinic-form">			
+			<%= form_tag('/verify') %>
+			<%= text_field_tag 'clinic_id', nil, class: "input-sm", placeholder: "Enter Clinic ID" %>
+			<%= submit_tag 'submit', class: "btn btn-primary", onclick: "showLoader()" %>
+			<div class="whirl no-overlay sphere" id="load_icon"></div>
+		  <% if flash[:notice] %>
+				<div class="notice"><%= flash[:notice] %></div>
+			<% end %>
+		</div>
 	</div>
+
+	
+
+
+
+<!-- 	<div class="row" id="load_icon">
+		<div class="col-md-4 col-md-offset-4">
+		 
+  </div>
+	</div> -->
 </div> <!-- /container -->
 
+ 
 
 

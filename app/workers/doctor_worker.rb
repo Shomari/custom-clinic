@@ -38,7 +38,6 @@ class DoctorWorker
 		else
 			avatar = Image.read(avatar.file.file).last
 		end
-		binding.pry
 		background      = ImageList.new('app/assets/images/CMH_template001.jpg')
 		avatar          = avatar.resize_to_fit(700,500)
 		name_img        = create_section_image(name, NAME_IMG_COLOR, NAME_IMG_FONT, NAME_IMG_FONT_SIZE, NAME_IMG_PICTURE_SIZE)

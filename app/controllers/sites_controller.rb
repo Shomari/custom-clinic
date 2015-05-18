@@ -7,14 +7,15 @@ class SitesController < ApplicationController
 	TRACKS = ["Track 1", "Track 2"]
 
 	def show
-		@clinic_id  = session[:clinic_id].to_i
+		@clinic_id   = session[:clinic_id].to_i
+		@clinic_name = session[:clinic_name]
 
-		@site       = Site.find_or_initialize_by(clinic_id: session[:clinic_id].to_i)
-		@doctors    = @site.build_doctors
-		@offices    = @site.build_offices
-		@reminders  = @site.build_reminders
+		@site        = Site.find_or_initialize_by(clinic_id: session[:clinic_id].to_i)
+		@doctors     = @site.build_doctors
+		@offices     = @site.build_offices
+		@reminders   = @site.build_reminders
 
-		@tracks     = TRACKS
+		@tracks      = TRACKS
 	end
 
 	def create
