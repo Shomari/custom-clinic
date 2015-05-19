@@ -33,6 +33,7 @@ gem 'sidekiq'
 gem 'sinatra', require: false
 
 gem 'redis-rails'
+gem 'puma'
 
 gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its ascollection pipeline) supports LESS
@@ -65,7 +66,7 @@ ruby "2.1.5"
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
-  gem 'unicorn'
+  # gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
