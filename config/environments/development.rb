@@ -3,16 +3,18 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
 # SMTP settings for gmail
   config.action_mailer.smtp_settings = {
- :address              => "smtp.gmail.com",
- :port                 => 587,
- :user_name            => "xeroshogun@gmail.com",
- :password             => "wingzero05",
- :authentication       => "plain",
+  :tls                 => true,
+ :address              => 'smtp.gmail.com',
+ :port                 => 465,
+ :domain               => 'gmail.com',
+ :user_name            => 'cliniccustomization@gmail.com',
+ :password             => 'wpkirmyrlzsvvjgx',
+ :authentication       => 'plain',
 :enable_starttls_auto => true
 }
 
-REDIS_URL = 'redis://localhost:6379/0/cache'
-config.cache_store = :redis_store, 'redis://localhost:6379/0/cache', { expires_in: 90.minutes }
+  REDIS_URL = 'redis://localhost:6379/0/cache'
+  config.cache_store = :redis_store, 'redis://localhost:6379/0/cache', { expires_in: 90.minutes }
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development

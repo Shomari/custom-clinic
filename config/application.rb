@@ -32,6 +32,18 @@ module CustomClinic
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
     config.cache_store = :redis_store, 'redis://localhost:6379/0/cache', { expires_in: 90.minutes }
+
+      config.action_mailer.delivery_method = :smtp
+    # SMTP settings for gmail
+      config.action_mailer.smtp_settings = {
+     :address              => 'smtp.gmail.com',
+     :port                 => 587,
+     :domain               => 'gmail.com',
+     :user_name            => 'cliniccustomization@gmail.com',
+     :password             => 'wingzero05',
+     :authentication       => 'plain',
+    :enable_starttls_auto => true
+    }
     
   end
 end

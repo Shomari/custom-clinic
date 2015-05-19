@@ -9,7 +9,6 @@ class DoctorWorker
 	def perform(updates, avatars, params, site_id, user_email)
 		site = Site.find(site_id)
 		audio = get_audio_track(params["site"]["audio"])
-
 		
 		updates.each do |number|
 			name           = params["site"]["doctors_attributes"][number]["name"]

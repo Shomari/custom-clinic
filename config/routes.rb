@@ -1,12 +1,15 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  devise_for :users, :controllers => { :registrations => "registrations" }
+  devise_for :users
 
-  get '/site',      to: 'sites#show', as: 'show_site'
-  post '/verify',   to: 'admin#verify'
+  #, :controllers => { :registrations => "registrations" }   Used this to go to admin page in production
 
-  root 'admin#index'
+  root 'sites#show'
+
+  get '/site', to: 'sites#show', as: 'show_site'
+  # post '/verify',   to: 'admin#verify'
+
 
   resources :sites
   resources :doctor

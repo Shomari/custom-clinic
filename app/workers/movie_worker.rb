@@ -22,6 +22,7 @@ class MovieWorker
 
 		### Delete temporary images and video after they are no longer needed
 		###  This should get moved down after S3 upload has finished.
+
 		File.delete("tmp/images/#{random}.jpg")
 		File.delete(output)
 

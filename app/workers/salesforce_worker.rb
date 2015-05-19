@@ -16,7 +16,7 @@ class SalesforceWorker
 		  #need to pass in account
 		  account = client.find('Account', clinic_id, 'CMHID__c')
 		  account_id = account.Id
-		  client.create!('Case', Subject: "#{Time.now}", Priority: 'Low', AccountId: account_id, Description: file )
+		  client.create!('Media_Change_Request__c', Subject: "#{Time.now}", Priority: 'Low', AccountId: account_id, Description: file )
 
 	end
 end

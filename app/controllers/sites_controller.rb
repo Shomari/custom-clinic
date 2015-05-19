@@ -7,10 +7,11 @@ class SitesController < ApplicationController
 	TRACKS = ["Track 1", "Track 2"]
 
 	def show
-		@clinic_id   = session[:clinic_id].to_i
-		@clinic_name = session[:clinic_name]
+		# @clinic_id   = session[:clinic_id].to_i
+		# @clinic_name = session[:clinic_name]
 
-		@site        = Site.find_or_initialize_by(clinic_id: session[:clinic_id].to_i)
+		@site        = Site.new
+		#.find_or_initialize_by(clinic_id: session[:clinic_id].to_i)
 		@doctors     = @site.build_doctors
 		@offices     = @site.build_offices
 		@reminders   = @site.build_reminders
@@ -43,9 +44,9 @@ class SitesController < ApplicationController
 		site = Site.create(site_params)
 		site_id = site.id
 
-		DoctorWorker.perform_async(doctor_updates, avatars, params, site_id, current_user)
-		OfficeWorker.perform_async(office_updates, params, site_id, current_user)
-		ReminderWorker.perform_async(reminder_updates, params, site_id, current_user)
+		DoctorWorker.perform_async(doctor_updates, avatars, params, site_id, current_user.email)
+		OfficeWorker.perform_async(office_updates, params, site_id, current_user.email)
+		ReminderWorker.perform_async(reminder_updates, params, site_id, current_user.email)
 		
 		render 'submit'
 	end
