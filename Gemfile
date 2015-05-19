@@ -33,7 +33,7 @@ gem 'sidekiq'
 gem 'sinatra', require: false
 
 gem 'redis-rails'
-gem 'puma'
+# gem 'puma'
 
 gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its ascollection pipeline) supports LESS
