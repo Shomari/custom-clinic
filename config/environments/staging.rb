@@ -1,7 +1,7 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  REDIS_URL = "redis://52.24.176.56"
+  # REDIS_URL = "redis://52.24.176.56"
   config.cache_store = :redis_store, "#{REDIS_URL}/0/cache", { expires_in: 90.minutes }
 
   # Code is not reloaded between requests.
