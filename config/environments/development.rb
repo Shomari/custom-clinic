@@ -1,17 +1,5 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-  config.action_mailer.delivery_method = :smtp
-# SMTP settings for gmail
-  config.action_mailer.smtp_settings = {
-  :tls                 => true,
- :address              => 'smtp.gmail.com',
- :port                 => 465,
- :domain               => 'gmail.com',
- :user_name            => 'cliniccustomization@gmail.com',
- :password             => 'wpkirmyrlzsvvjgx',
- :authentication       => 'plain',
-:enable_starttls_auto => true
-}
 
   REDIS_URL = 'redis://localhost:6379/0/cache'
   config.cache_store = :redis_store, 'redis://localhost:6379/0/cache', { expires_in: 90.minutes }
