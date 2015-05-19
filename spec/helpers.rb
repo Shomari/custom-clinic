@@ -1,6 +1,6 @@
 module Helpers
 
-	def params
+	def params()
 		{"site"=>
 	  {"clinic_id"=>"69",
 	   "audio"=>"Track 1",
